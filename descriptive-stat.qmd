@@ -1,0 +1,421 @@
+# 記述統計
+
+**今回の目標**
+
+-   Rで基本的な統計量を求めてみよう！
+-   Rで作図する例を見てみよう！（今回は、作図コードの内容を理解しなくても良い）
+
+## 1変数の記述統計とデータの可視化 {#sec-1var}
+
+### パッケージの読み込み {#sec-pacs}
+
+まず、この授業で頻繁に（ほぼ毎回）使う、**tidyverse**パッケージを使ってみよう。
+
+インストールしよう。既にインストール済みなら再度インストールする必要はない。割と時間がかかるので注意。
+
+::: callout-important
+この説明は、大学の情報演習室を使うことを想定して書いている。
+自分のパソコンを使っている場合は、まず以下の作業が必要である。**この作業を大学の情報演習室で行ってはいけない**（すべてのパッケージがインストール済みである）。
+
+```{r}
+#| eval: false
+pkgs <- c("tidyverse", 
+          "sytemfonts",
+          "shiny",
+          "miniUI",
+          "DT",
+          "patchwork",
+          "remotes")
+install.packages(pkgs)
+remotes::install_github("Gedevan-Aleksizde/fontregisterer", 
+                        upgrade = "never")
+```
+:::
+
+パッケージの読み込みには、`library()` を使う。パッケージの読み込みは、R (RStudio) を起動するたびに行う必要がある。つまり、`library()` はそのパッケージを使う場合には毎回実行する必要がある。また、複数の qmd で同じパッケージを使う場合には、それぞれの qmdファイルに`library()` でパッケージを読み込む命令を書いておく必要がある（qmd ファイルについては [6章](intro-to-quarto.html) で説明する）。
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+図中の日本語が文字化けすることがあるので、OSに合わせてフォントを指定する以下のコードを実行する。
+**大学のパソコンはWindowsなので、Windows用のコードのみ実行する**。
+
+Windows ユーザ（大学PCを含む）は、
+```{r}
+#| eval: false
+library(fontregisterer)
+theme_set(theme_gray(base_size = 9,
+                     base_family = "Yu Gothic"))
+```
+を実行する。
+
+
+Linux ユーザ（[IPAexフォント](https://moji.or.jp/ipafont/) が利用可能である場合）は、
+```{r}
+#| message: false
+theme_set(theme_gray(base_size = 9,
+                     base_family = "IPAexGothic"))
+```
+を実行する。
+
+macOS ユーザは、
+```{r}
+#| eval: false
+theme_set(theme_gray(base_size = 9,
+                     base_family = "HiraginoSans-W3"))
+```
+を実行する。
+
+
+:::callout-note
+利用可能なフォントは、`library(fontregisterer)` を実行した後（Linuxでは実行しなくて良い）に、自分のOSにあわせて以下のいずれかを実行することで確認できる。
+
+```{r}
+#| eval: false
+# Linux
+systemfonts::system_fonts()$family
+```
+
+```{r}
+#| eval: false
+# macOS
+library(fontregisterer)
+names(quartzFonts())
+```
+
+```{r}
+#| eval: false
+# Windows
+library(fontregisterer)
+names(windowsFonts())
+```
+:::
+
+
+### データセットの読み込み {#sec-datasets}
+
+今回の実習で利用するデータをダウンロードしよう。 準備として、現在利用しているプロジェクト（上で作ったフォルダ）の中に、**data** という名前のフォルダを作ろう。
+
+```{r}
+#| eval: false
+dir.create("data")
+```
+
+次にデータセット [fake_data_01.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) をダウンロードし、今作った data フォルダの中に保存する。
+
+```{r}
+#| eval: false
+download.file(
+  url = "https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv",
+  destfile = "data/fake_data_01.csv")
+```
+
+ダウンロードがうまくいかない（あるいは、次の読み込み段階で失敗する）場合は、ファイル (`fake_data_01.csv`) を[ここ](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。
+
+このデータは CSVと呼ばれる形式で保存されているので、`readr::read_csv()`という関数を使ってこのデータセットを読み込むことができる（他の形式で保存されたデータの使い方は必要に応じて後の授業で解説する）。
+
+このデータセットを `myd` という名前で利用することにしよう（これはデータセットのファイル名を変えるのではなく、R上での呼び名を決めているだけである）。
+
+```{r read_csv}
+#| message: false
+myd <- read_csv("data/fake_data_01.csv")
+```
+
+読み込んだデータの中身を確認してみよう。 次のコマンドを打ち込むと、スプレッドシート（Excelの表のようなもの）上にデータが表示される。
+
+```{r}
+#| eval: false
+View(myd)
+```
+
+確認できたら、スプレッドシートが表示されているタブを閉じる。
+
+次に、コンソール上に、データセットの最上部または最下部にある数行分だけを表示してみよう。
+
+```{r}
+head(myd)          # 行数を指定しないと6行分
+tail(myd, n = 8)   # 最後の8行分
+```
+
+データセットに含まれる変数名を確認したいときは、
+
+```{r}
+names(myd)
+```
+
+とする。
+
+データセットに含まれる観測数 ($n$) と変数の数を知りたいときは、
+
+```{r}
+dim(myd)
+```
+
+とする。最初の数字が$n$の数（データセットの行数）、2番目の数字が変数の数（列数）である（RStudio を使うと、右上のウィンドウの"Environment" というタブにこの情報が既に表示されているので、そこで確認してもよい）。
+
+また、データセットの確認には、`glimpse()` も便利である。
+
+```{r}
+glimpse(myd)
+```
+
+データセットに含まれるすべての変数の基本的な統計量を確認したいときは、
+
+```{r}
+summary(myd)
+```
+
+とする。
+
+### 基本的な統計量の計算 {#sec-stats}
+
+基本的な統計量の計算方法を学習しよう。Rにはよく使われる統計量を計算するための関数があらかじめ用意されているので、関数を利用する。Rの関数の基本的な形は、`関数名()` である。この `()` の中に何を書くべきかは、関数によって異なる。Rの関数の使い方を身につけるためには、`()` の中身を適切に指定できるようになることが必要である。`()` の中身は関数の**引数（ひきすう; arguments）**と呼ばれる。
+
+::: callout-note
+引数には仮引数 (paramter) と実引数 (argument) という区別があるが、現時点では深入りしないことにする。気になる場合は、[この説明](http://www.cc.kyoto-su.ac.jp/~yamada/ap/parameter_argument.html) を参照されたい。
+:::
+
+私たちが利用しているデータセット `myd` に含まれる `height`（身長）という変数 (variable) の平均値（算術平均; mean）を求めよう。Rでは、`mean(変数名)`とすると、平均値が求められる。
+
+ただし、`height` という変数は `myd` というデータの一部（1つの変数, 1つの列）なので、それをRに伝える必要がある。データセットの中身の変数を使うときは、\$ マークを使って、`データセット名$変数名`とすればよい。よって、height の平均値は
+
+```{r}
+mean(myd$height)
+```
+
+である。
+
+次に、身長の中央値 (median) を求めよう。中央値は `median()` で求められるので、
+
+```{r}
+median(myd$height)
+```
+
+である。
+
+続いて、身長の分散 (variance) を求めよう。分散（より正確には、不偏分散）は、`var()`で求める。したがって、
+
+```{r}
+var(myd$height)
+```
+
+である。
+
+今度は、標準偏差 (standard deviation) を求めよう。標準偏差は、`sd()` で計算できるので、
+
+```{r}
+sd(myd$height)
+```
+
+である。また、標準偏差は分散の平方根 (square root) なので、`sqrt()` を使って、
+
+```{r}
+sqrt(var(myd$height))
+```
+
+としても、`sd()` を使った場合と同じ結果が得られる。
+
+次に、範囲 (range)を求めよう。最大値は `max()`、最小値は `min()` で求められるので、範囲は
+
+```{r}
+max(myd$height) - min(myd$height)
+```
+
+である。`range()` という関数もあるが、この関数の結果は
+
+```{r}
+range(myd$height)
+```
+
+となり、区間が表示されるので注意が必要である。
+
+続いて、四分位範囲 (interquartile range; IQR) を求めよう。`IQR()` を使う。
+
+```{r}
+IQR(myd$height)
+```
+
+ちなみに、第1四分位数すなわち25パーセンタイルは `quantile()` 関数を使って求めることができる。
+
+```{r}
+(q1 <- quantile(myd$height, prob = 0.25))
+```
+
+同様に第3四分位数すなわち75パーセンタイルは、
+
+```{r}
+(q3 <- quantile(myd$height, prob = 0.75))
+```
+
+である。第3四分位数から第1四分位数を引くと、
+
+```{r}
+q3 - q1
+```
+
+となり、先ほど`IQR()`求めた四分位範囲と一致することが確認できる。
+
+`quantile()` を使うと、自分の好きなパーセンタイルを求めることができる。 例として、22パーセンタイルと77パーセンタイル、87パーセンタイルを同時に求めてみよう。
+
+```{r}
+quantile(myd$height, prob = c(0.22, 0.77, 0.87))
+```
+
+これを使えば、身長 `height` の五数要約 (five-number summary) を表示することができる。次のようにすればよい。
+
+```{r}
+quantile(myd$height, prob = c(0, 0.25, 0.5, 0.75, 1))
+```
+
+五数要約のための関数 `fivenum()` を使うこともできる。
+
+```{r}
+fivenum(myd$height)
+```
+
+（一部の結果が四捨五入されていることを除けば）同じ結果が得られた。
+
+**課題**
+
+-   体重 (weight) について、平均値、中央値、分散、標準偏差、四分位範囲を求めよう。
+-   所得 (income) について、平均値、中央値、分散、標準偏差、四分位範囲を求めよう。
+
+### 変数の可視化 {#sec-viz1}
+
+変数の特徴は統計量によってある程度把握することができるが、統計量だけではわかりにくい特徴もある。そこで、データ分析を行う際には、図を作って自分が持っているデータを可視化するという作業が必要かつ重要である。
+
+今日は、**ggplot2**パッケージを使って、簡単な図をいくつか作ってみよう。**ggplot2**は先ほど読み込んだ **tidyverse** の一部なので、新たに読み込む必要はない。また、**ggplot2**の詳しい使い方は[5章](intro-to-ggplot2.html)」で解説する。
+ここではコードの中身まで理解しなくてもよい。
+
+まず、最も基本的かつよく使う図であるヒストグラム　(histogram) を作ってみよう。 ggplot2では `geom_histogram()` でヒストグラムを作ることができる。
+
+例として、身長のヒストグラムを描いてみよう。
+
+```{r}
+#| message: false
+hist_h <- ggplot(myd, aes(x = height)) +
+  geom_histogram(color = "black")
+plot(hist_h)
+```
+
+これでとりあえずヒストグラムが描ける。
+
+このヒストグラムを元にして、様々なカスタマイズが可能である。例えば、横軸と縦軸のラベル (label) を変えたいときは、次のように `labs()`を加える。
+
+```{r}
+#| message: false
+hist_h2 <- hist_h + 
+    labs(x = "身長 (cm)", 
+         y = "度数")
+plot(hist_h2)
+```
+
+ビン（ヒストグラムの棒）の色を変えたいときは、`geom_histogram()` で `fill` を指定する。 指定可能な色については [このページ](http://www.okadajp.org/RWiki/?%E8%89%B2%E8%A6%8B%E6%9C%AC) を参照。
+
+```{r}
+#| message: false
+hist_h3 <- ggplot(myd, aes(x = height)) +
+  geom_histogram(color = "black", 
+                 fill = "dodgerblue") +
+  labs(x = "身長 (cm)", 
+       y = "度数")
+plot(hist_h3)
+```
+
+ヒストグラムのビンの幅は、`binwidth` で指定できる。
+
+```{r}
+hist_h4 <- ggplot(myd, aes(x = height)) +
+  geom_histogram(color = "black", 
+                 fill = "royalblue", 
+                 binwidth = 5) +
+  labs(x = "身長 (cm)", 
+       y = "度数")
+plot(hist_h4)
+```
+
+ヒストグラムの縦軸を度数 (frequency, count) ではなく確率密度 (probability density) に変えたいときは、y軸に `after_stat(density)` を指定する。
+
+```{r}
+hist_h5 <- ggplot(myd, aes(x = height, y = after_stat(density))) +
+  geom_histogram(color = "black", 
+                 fill = "dodgerblue", 
+                 binwidth = 5) +
+  labs(x = "身長 (cm)", 
+       y = "確率密度")
+print(hist_h5)
+```
+
+**課題**
+
+-   体重 (weight) のヒストグラム（色付き）を作り、日本語でラベルを付けよう。
+-   所得 (income) のヒストグラム（色付き）を作り、日本語でラベルを付けよう。
+
+## 2変数の記述統計とデータの可視化 {#sec-2var}
+
+### 2つの量的変数の関係を図示する {#sec-bivarviz}
+
+2つの量的変数の関係は、散布図 (scatter plot) で確認する。ここでは、身長 (height) と体重 (weight) の関係を図示してみよう。ggplot2では、`geom_point()` で散布図ができる。
+
+```{r scatter1}
+scat <- ggplot(myd, aes(x = height, y = weight)) +
+  geom_point() +
+  labs(x = "身長 (cm)", y = "体重 (kg)")
+plot(scat)
+```
+
+このデータセットに含まれる身長と体重の間には、どのような関係があるだろうか？
+
+### 2つの量的変数の関係を統計量で示す {#sec-bivarstat}
+
+2つの量的変数の関係を表すのにもっともよく使われるのは、相関係数 (correlation coefficient) である。この統計量は、$r$ で表されることが多い。$-1 \leq r \leq 1$となる。$a$と$b$ という2つの変数があったとき、$a$が大きくなるほど$b$ も大きくなるという関係があるとき、「$a$と$b$には正の相関 (positive correlation) がある」と言い、このとき $r > 0$ である。また、$a$が大きくなるほど$b$ が小さくなるという関係があるとき、「$a$と$b$には負の相関 (negative correlation) がある」と言い、このとき $r < 0$ である。$r = 0$ のとき、「$a$と$b$に相関関係はない」と言う。
+
+正の相関があるとき、$r$が$1$に近いほど、その関係は強い。また、負の相関があるとき、$r$が$-1$に近いほど、その関係は強い。つまり、相関関係は、相関係数の絶対値が1に近いほど強い。
+
+Rで相関係数を求めるときは、`cor()`を使う。身長と体重の相関係数は、
+
+```{r}
+cor(myd$height, myd$weight)
+```
+
+である。この2変数にはどんな関係があるだろうか？
+
+### 散布図と相関係数 {#sec-scatcor}
+
+2つの量的な変数の関係を調べるときは、散布図と相関係数の**両者**を使ったほうがよい。
+
+散布図だけを使うと、本当は存在しない関係を、誤って見つけてしまうことがある。例えば、本当は相関がない2つの変数の散布図を描いたとき、描かれた点がなんとなく右肩上がりの直線の周りに集まっているように見えてしまうことがある。これは、人間がパタンを見つける能力に優れている（優れ過ぎている？）からだと考えられる。偶然できた壁のシミが人間の顔に見えてしまうことがあるというのも似たような現象である。
+
+散布図だけに頼ると、存在しないパタンが見えてしまうことがあるので、散布図で発見したパタンが本当にあるかどうか、相関係数を求めて確かめるべきである。
+
+反対に、相関係数だけに頼るのも危険である。相関係数は、2変数のあらゆる関係を捉えられるわけではない。相関係数が示すのは、2つの変数の**直線的な関係だけ**である。
+
+例として、$x$ と$y$ という2つの変数を以下のとおり作り、相関係数を計算してみよう。
+
+```{r}
+x <- -10:10
+y <- x ^ 2
+cor(x, y)
+```
+
+2変数と$x$と$y$の相関係数は（ほぼ）0である。相関係数だけに頼ると、2つの変数の間には関係がないと言う結論が出せそうである。しかし、相関係数が低くても、必ず散布図を描いたほうがよい。散布図を作ってみよう。
+
+```{r plot-x-y}
+newd <- tibble(x = x, y = y)
+scat2 <- ggplot(newd, aes(x = x, y = y)) +
+  geom_point()
+plot(scat2)
+```
+
+この図を見て、$x$と$y$は無関係と言えるだろうか？
+
+散布図から明らか（$y$をどのように作ったかを思い出せばもっと明らかだが）なように、$x$と$y$には強い関係がある（$y$は$x$の関数である）。しかし、その関係は**曲線的** なので、**直線的な関係しか捉えられない相関係数**は、強い関係を見落としてしまうのである。
+
+::: callout-important
+2つの量的変数の関係を調べるときは、**散布図と相関係数の両方を確認する**習慣を身につけよう。
+:::
+
+2つの変数の関係について調べる方法の詳細については、「統計学2」（3Qに開講）で扱う予定である。
+

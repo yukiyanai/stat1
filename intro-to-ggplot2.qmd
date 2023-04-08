@@ -1,0 +1,1067 @@
+# ggplot2 入門
+
+**今回の目標**
+
+-   ggplot2 で作図する方法を覚えよう！
+
+## 準備 {#sec-prep6}
+
+今回利用するパッケージを読み込もう。**ggplot2** は **tidyverse** に含まれているので、`library()` で **tidyverse** を読み込めばよい。
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+## データフレーム {#sec-dataframe}
+
+ggplot2 で図を作るためには、**データフレーム (data frame)** と呼ばれる形式のデータが必要である。 そこで、まずデータフレームについて説明する。
+
+### CSVデータの読み込み {#sec-csv}
+
+CSV形式で保存されたデータセットをもっているなら、`readr::read_csv()` や `read.csv()` などでそのデータを読み込めば、データフレームができる。
+
+::: callout-note
+**readr** パッケージも tidyverse に含まれているので、tidyverse を読み込み済みならあらためて `librar(readr)` を実行する必要はない。 このように、tidyverse はデータ分析でよく使うツールをまとめて提供しており、便利である。 詳しくは、『私たちのR』「[データハンドリング](http://www.jaysong.net/RBook/datahandling1.html)」 を参照されたい。
+:::
+
+例として、前にも使った [fake_data_01.csv](http://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) を読み込んでみよう。プロジェクト内の data ディレクトリ（フォルダ）に `fake_data_01.csv` があることを想定している。
+
+```{r}
+#| message: false
+myd <- read_csv("data/fake_data_01.csv")
+```
+
+これがデータフレームかどうか確かめるために、`is.data.frame()` を使う。
+
+```{r}
+is.data.frame(myd)
+```
+
+**TRUE** （真）という答えが返され、`myd` がデータフレームであることがわかる。
+
+データフレームの中身は、`tibble::glimpse()` で確認できる。
+
+```{r}
+glimpse(myd)
+```
+
+`id`, `gender`, `age`, `height`, `weight`, `income` という6つの変数があり、`gender` が `<chr>` すなわち文字列 (character) 型で、他の変数はすべて `<dbl>` すなわち実数 (double \[double-precision floating-point\]) 型であることがわかる。
+
+データフレームの中身を確認する方法は他にもいくつかある。 `View()` を使うと、表計算ソフトのスプレッドシートと同じように、データを表形式で表示してくれる。 Source ペインに表示されるので確認が終わったらタブを閉じるようにしよう。 **この関数は qmd (Rmd) ファイルではなく、Console に直接入力**したほうが良い。
+
+::: callout-tip
+`View()` や `help()` のように、RStudio でインタラクティブに（マウスを使って）操作することを想定するコマンドは、Console に直接書き込むようにする。また、繰り返し使わないコマンド（例：`install.packages()` ）も R マークダウンに記録するのではなく、Consoleに書き込もう。
+:::
+
+```{r}
+#| eval: false
+View(myd)
+```
+
+ひとつひとつの変数が列（縦方向の並び）を構成し、観測個体が行（横方向の並び）を構成していることがわかる。 `View()` の代わりに、RStudio の右下のペインにある **Environment** タフで、**Data** という項目に表示されているデータの右端にあるボタンを押して、データを表示することもできる。
+
+データフレームの各列の名前（つまり、変数名）を知りたいときは、`names()` を使う。
+
+```{r}
+names(myd)
+```
+
+これで、どのような名前で変数が記録されているかがわかる。
+
+この例では変数が6つしかないので自分で変数の数を数えるのも容易である。しかし、変数の数が多い場合には、自分で数えるのは面倒だ。そのようなときは、`ncol()` を使う（ncol は the <u>n</u>umber of <u>col</u>umns \[列の数\] の略である）。
+
+```{r}
+ncol(myd)
+```
+
+これで、`myd` には変数が6つあることがわかる。
+
+また、データに含まれる観測個体の数は、`nrow()` で確かめることができる (the <u>n</u>umber of <u>row</u>s \[行の数\] の略である）。
+
+```{r}
+nrow(myd)
+```
+
+`myd` は100行あることがわかる。
+
+`dim()` を使えば、行数と列数を1度に調べることができる。
+
+```{r}
+dim(myd)
+```
+
+実は、行数と列数は、上で`glimpse(myd)` を実行したときにも表示されていた。
+
+データの先頭の数行を表示して変数の中身を確認したいときは、`head()` を使う。
+
+```{r}
+head(myd)
+```
+
+このように、デフォルトでは最初の6行が表示される。表示する行数は、自分で指定できる。引数 `n`を使う。
+
+```{r}
+head(myd, n = 4)
+```
+
+同様に、データの末尾は `tail()` で表示できる。
+
+```{r}
+tail(myd, n = 5)
+```
+
+データの中身をさらに詳しく知りたい場合には、`str()` (<u>str</u>ucture) を使う。
+
+```{r}
+str(myd)
+```
+
+この情報はR初心者にはわかりにくいと思われるので、最初は `glimpse()` を使った方がよいだろう。
+
+データセットをRに読み込んだら、`glimpse()` をはじめとするさまざまな関数を使って、データの中身を確認する習慣を身につけよう。
+
+### データフレームの作成 {#sec-makedf}
+
+データフレームは、`data.frame()` を使ってRで作ることもできる。データフレームの代わりに**tibble** と呼ばれる形式のデータを使うこともできる。tibble は、`tibble::tibble()` で作れる。
+
+練習のために、`df1`という名前のデータフレーム (data.frame) と、`df2`という名前のtibble を作ってみよう。まず、`x` と`y` という2つの変数をもつ `df1` を作る。
+
+```{r}
+df1 <- data.frame(x = 1:100, 
+                  y = 100:1)
+is.data.frame(df1)
+```
+
+このデータの中身を確認してみよう。
+
+```{r}
+glimpse(df1)
+```
+
+`x` と `y` という変数があり、それぞれが `<int>` すなわち整数 (integer) 型であることがわかる。また、データは100行2列である。
+
+次に、`v1`, `v2`, `v3` という3つの変数をもつ `df2` を `tibble()` で作る。`rnorm(n, mean, sd)` で、平均が`mean`、標準偏差が`sd` の正規分布から `n` 個の乱数を生成することができる（詳しくは、後半のトピックで説明する）。
+
+```{r}
+df2 <- tibble(v1 = rnorm(100, mean =  0, sd = 5),
+              v2 = rnorm(100, mean = -4, sd = 5),
+              v3 = rnorm(100, mean =  0, sd = 1))
+is.data.frame(df2)
+```
+
+`df2` の中身を確認しておこう。
+
+```{r}
+glimpse(df2)
+```
+
+`v1`, `v2`, `v3` という3つの変数があり、それぞれが `<dbl>` すなわち実数型であることがわかる。このデータフレームは100行3列である。
+
+::: callout-note
+`<dbl>` というのは、double precision floating point number type（倍精度浮動小数点数型）のことである。この授業で必要な範囲では、実数 (real number) であると考えて差し支えない。この他に授業で出てくる変数の型は、
+
+-   `<int>`: integer（整数型）
+-   `<lgl>`: logical（論理型）
+-   `<chr>`: character（文字列型）
+-   `<fct>`: factor（因子型）
+
+それぞれ登場したときに必要な範囲で説明するが、詳しくは「プログラミング」の授業で勉強してほしい。
+:::
+
+このように、`data.frame()` と `tibble()` を使って、`df1`と`df2`という "data.frame" （データフレーム）を作ることができた。基本的にはどちらの方法でデータフレームを作っても良いが、特に`data.frame()` のほうを好む理由がなければ、今後は `tibble()` でデータフレーム (tibble) を作ろう。（tibble を優先する理由の説明は割愛するが、**Consoleに直接** `df1` \[これは data.frame である\] と入力して実行した結果と、 同じく `df2`\[これは tibble である\] と入力して実行した結果を比べると、tibble のほうが良い理由の1つがわかるだろう。）
+
+### 組み込みデータ {#sec-builtindata}
+
+Rにはあらかじめいくつかの（多くの！）データフレームが用意されている。たとえば、自動車に関するデータセットである**mtcars**というものがある。このデータは、`data()` で呼び出すことができる。
+
+```{r}
+data(mtcars)
+```
+
+これを実行すると、RStudio 右下ペインの **Environment** タブの中で、**Values** という項目のところに、`mtcars` が表示されるはずだ。この中身を確認してみよう。
+
+```{r}
+glimpse(mtcars)
+```
+
+32行11列のデータであることがわかる。この時点で、 **Environment** タブの中で **Data** 項目の中に mtcars が移動し、データフレームとして認識されていることがわかる。念のために確認しておこう。
+
+```{r}
+is.data.frame(mtcars)
+```
+
+このデータの詳細を確認したければ、次のコマンドで。
+
+```{r}
+#| echo: false
+?mtcars
+```
+
+他にどんなデータが利用可能か確認したければ、以下を実行する。
+
+```{r}
+#| eval: false
+data()
+```
+
+## ggplot2の基礎 {#sec-ggplotbasic}
+
+### ggplot2 とは何か {#sec-wiggplt}
+
+**ggplot2** は、Rで**綺麗な**図を作るためのパッケージである。 Posit（旧RStudio）のChief Scientist である [Hadley Wickham](http://hadley.nz/) が大学院生時代に開発・公開し、アップデートを重ねてきたものである（Hadley は **tidyverse** などの重要パッケージ開発の中心人物であり、世界中のRユーザから最も尊敬されている人物だと考えられる。日本の一部のRユーザは彼を「羽鳥先生」と呼ぶ）。
+
+ggplot2 の *gg* は　***G**rammar of **G**raphics*（図のための文法） という意味で、一貫した方法で様々な図が作れるように工夫されている。 最初は文法を覚えるのに少し苦労するかもしれない。しかし、一度文法を身につけてしまえば、様々な図を簡単に作れるようになるので、とても便利である。また、デフォルト（既定）の設定でそれなりに綺麗な図が作れるのも魅力である（某表計算ソフトのように、何も考えずに 3D棒グラフのような醜い図を作ってしまうということが防げる）。
+
+ggplot2 についての詳しい説明は、Hadley自身が書いた *ggplot2: Elegant Graphics for Data Analysis, 3rd edition.* (Springer) で読むことができる（オンラインで[無料で公開](https://ggplot2-book.org/) されている）。
+
+また、チートシート（[日本語版](https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/japanese/data-visualization_ja.pdf); [英語版](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)）が公開されているので、ダウンロードしていつでも見られるようにしておくと、便利である。
+
+::: callout-tip
+この他にも、さまざまなチートシートが [Posit のウェブサイト](https://posit.co/resources/cheatsheets/) で公開されている。 いくつかのチートシートには日本語翻訳もある。作成者と翻訳者の皆さんに感謝。
+:::
+
+### ggplot2 パッケージの読み込み {#sec-loadggplot2}
+
+このページの冒頭に書いたとおり、**ggplot2**は **tidyverse** に含まれているので、`library()` で **tidyverse** を読み込めばよい。上で実行したなら、再度実行する必要はない。
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+次に、日本語が正しく表示されるようにするため、`theme_set()` で使用する文字フォントを指定する。OSによって命令がやや異なるので注意されたい。 以下のチャンクは、KUTの情報演習室を利用することを想定して、Windows用に書かれている（コメント部分に他のOS用の命令も書いてある）。以下はあくまで例であり、他のフォントを使用してもよい（各自のパソコンにインストールされているフォントは私にはわからないので、変えたいなら自分で調べること。もちろん、日本語が表示できるフォントが必要）。
+
+```{r}
+#| eval: false
+## 図のなかで日本語を使えるようにする
+## フォントの設定はお好みで
+#my_font <- "HiraginoSans-W3" # macOS
+## Unix/Linux ではIPAexフォントのインストールが必要かも）
+#my_font <- "IPAexGothic" # Linux
+library(fontregisterer)
+my_font <- "Yu Gothic"
+theme_set(theme_gray(base_size = 9,
+                     base_family = my_font))
+```
+
+```{r}
+#| include: false
+my_font <- "HiraginoSans-W3"
+theme_set(theme_gray(base_size = 9,
+                     base_family = my_font))
+```
+
+
+
+::: callout-tip
+コードチャンクに書かれたコマンドを1つずつ実行するときに使うショートカットは `command` + `reutrn` または `Ctrl` + `Enter` であることは以前説明した。複数行にわたるコマンドであっても、1つのコマンドであればこの方法で実行できる。しかし、上のコードチャンクのように複数のコマンドが含まれる場合、その方法では一挙に実行することができない。
+
+コードチャンク全体を一挙に実行するためには、`command` + `shift` + `return` または `Ctrl` + `Shift` + `Enter` というショートカットを利用する。
+:::
+
+### ggplot の基本的な使い方 {#sec-how2gg}
+
+`ggplot2::ggplot()` を使って図を作る手順は次のとおりである。
+
+1.  作図対象となるデータを `ggplot()` に入力する
+    -   `data`: データフレームを指定
+    -   `mapping`: どの変数を図のなかでどのように利用するか指定
+2.  `geom_xxx()` で図の層を加える（xxx の部分はグラフの種類によって変わる）
+3.  ラベル (label) や凡例 (legend) の指定、作図範囲の絞り込み、軸の交換などを行う
+4.  `plot()` で図を表示する
+
+順番にやってみよう。
+
+#### 例1：散布図
+
+上で読み込んだ **mtcars** は自動車に関するデータである。例として、燃費 (mile per gallon; mpg) と車の重量 (weight; wt) の関係を散布図にしてみよう。
+
+まず、 作図対象となるデータを指定する。また、作図の対象となる変数を指定する。ここでは、散布図の横軸 `x`に wt、縦軸`y`に mpg を指定する。
+
+```{r}
+p1_1 <- ggplot(data = mtcars, 
+               mapping = aes(x = wt, y = mpg)) 
+```
+
+同じことだが、`data` と`mapping` は省略して
+
+```{r}
+#| eval: false
+p1_1 <- ggplot(mtcars, aes(x = wt, y = mpg)) 
+```
+
+と書くことが多い。
+
+この時点で図を表示してみる。
+
+```{r}
+plot(p1_1)
+```
+
+指定した通り、横軸に`wt`、縦軸に`mpg`をとった図を描く準備ができているが、グラフ自体はまだない。
+
+ここに、散布図を作るための層 (layer) を加える。図を作るためには、`geom_xxx()` のように、**geom** から始まる関数で新たな層 (layer) を加える必要がある。geom とは <u>geom</u>etry（形状）のことである。たとえば、ヒストグラム (histogram) を作るときは`geom_histogram()` を、箱ひげ図 (box\[-and-whisker\] plot) を作るときは `geom_boxplot()` を使う。
+
+散布図は、`geom_point()` でできる。
+
+```{r}
+p1_2 <- p1_1 + geom_point()
+```
+
+このように、前に作ったものに `+` で何かを加えることで、ggplot に新たな要素を追加することができる。この時点で、作った図を表示してみよう。
+
+```{r}
+plot(p1_2)
+```
+
+散布図ができた。
+
+次に、ラベルをわかりやすいものに変える。`labs()` で変更する。
+
+```{r}
+p1_3 <- p1_2 + 
+    labs(x = "重量 (1000 lbs)", 
+         y = "燃費 (Miles / US gallon)")
+```
+
+表示してみる。
+
+```{r}
+plot(p1_3)
+```
+
+これで散布図ができた。
+
+慣れてきたら、一挙にコマンドを書いてもよい。
+
+```{r}
+p1 <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+    geom_point() +
+    labs(x = "重量 (1000 lbs)", 
+         y = "燃費 (Miles / US gallon)")
+plot(p1)
+```
+
+#### 例2：ヒストグラム
+
+引き続き **mtcars** を使う。燃費 (mile per gallon; mpg) のヒストグラムを作ってみよう。
+
+まず、作図対象となるデータを入力する。また、作図対象となる変数を指定する。ヒストグラムは**1つの変数**を可視化するグラフなので、**aes** には`x`のみ指定する。
+
+```{r}
+p2_1 <- ggplot(mtcars, aes(x = mpg)) 
+```
+
+この時点で図を表示してみる。
+
+```{r}
+plot(p2_1)
+```
+
+指定した通り、横軸にmpgをとった図を描く準備ができているが、グラフ自体はまだない。また、縦軸は指定していないので何もない。
+
+ここに、ヒストグラムを作るための層 (layer) を加える。ヒストグラムは、`geom_histogram()` でできる。
+
+```{r}
+p2_2 <- p2_1 + geom_histogram()
+```
+
+この時点で表示してみよう。
+
+```{r}
+plot(p2_2)
+```
+
+ヒストグラム自体はできている。しかし、ビン（ヒストグラムの一つひとつの棒）の幅が狭すぎるので、`binwidth` で調整する（`binwidth` を指定しないと、\`stat_bin()\` using ... というメッセージが表示され、適切な `binwidth` を設定するよう促される）。ここでは、2.5 mpgごとに1つのビン（ヒストグラムの棒）を作ってみよう。
+
+```{r}
+p2_3 <- p2_1 + 
+    geom_histogram(binwidth = 2.5)
+plot(p2_3)
+```
+
+ビンの境が見えにくいので、ビンの縁に黒色をつけよう。ビンの縁取りは `color` で指定する。`color` で指定するのはビンの中身の色ではないので注意しよう。
+
+```{r}
+p2_4 <- p2_1 + 
+    geom_histogram(binwidth = 2.5, color = "black")
+plot(p2_4)
+```
+
+ビンの区切りがちょうどいい位置にないので、`boundary` でビンの境界をどの位置に置くか指定する。今回はビンの幅が2.5 なので、境界線が$5, 7.5, 10, \dots$ になるように 5 を指定する。
+
+```{r}
+p2_5 <- p2_1 + 
+  geom_histogram(binwidth = 2.5, 
+                 color = "black",
+                 boundary = 5)
+plot(p2_5)
+```
+
+次に、ラベルをわかりやすいものに変える。
+
+```{r}
+p2_6 <- p2_5 + 
+    labs(x = "燃費 (Miles / US gallon)", y = "度数")
+plot(p2_6)
+```
+
+これで縦軸が度数 (count, frequency) のヒストグラムができた。
+
+ヒストグラムの縦軸を確率密度 (probability density) に変えたいときは、`aes()` で `y = after_stat(density)` を指定する。ついでに、ビンの色をドジャーブルーに変えてみる（必要ではない。Go, Dodgers!)
+
+```{r}
+p2_dens <- ggplot(mtcars,
+                  aes(x = mpg, 
+                      y = after_stat(density))) +
+    geom_histogram(binwidth = 2.5, 
+                   boundary = 5, 
+                   color = "black", 
+                   fill = "dodgerblue") +
+    labs(x = "燃費 (Miles / US gallon)", 
+         y = "確率密度")
+plot(p2_dens)    
+```
+
+指定可能な色は、[このページ](http://www.okadajp.org/RWiki/?%E8%89%B2%E8%A6%8B%E6%9C%AC) で確認できる。
+
+#### 例3：箱ひげ図
+
+Rに用意されている、ダイヤモンドのデータ **diamonds** を使ってみよう。
+
+```{r}
+data(diamonds)
+glimpse(diamonds)
+class(diamonds)
+```
+
+詳細については、`?diamonds` で確認できる。
+
+ダイヤモンドのカットの質 (cut) ごとの 深さ (depth) のばらつきを可視化するため、箱ひげ図 (box\[-and-whisker\] plot) を作ってみよう。
+
+まず、データとマッピングを指定する。
+
+```{r}
+p3_1 <- ggplot(diamonds, aes(x = cut, y = depth))
+plot(p3_1)
+```
+
+指定通り、横軸に cut、縦軸に depth を可視化する準備ができている。
+
+次に、`geom_boxplot()` で箱ひげ図の層を加える。
+
+```{r}
+p3_2 <- p3_1 + geom_boxplot() 
+plot(p3_2)
+```
+
+軸ラベルを日本語にする。
+
+```{r}
+p3_3 <- p3_2 + labs(x = "カット", y = "深さ")
+plot(p3_3)
+```
+
+Fair, Good なども日本語にすることもできるが、今回は覚えなくて良い（私にはダイヤモンドの知識がまったくないのでよくわからないが、ネットで検索した限りだと、Fair の訳は フェア、Good の訳は グッド、 ... で日本語にする意味がなさそう）。一応できるということを見せるために、コードは載せておく（このコードは今は理解しなくてよい）。
+
+```{r}
+p3_3a <- diamonds %>% 
+    mutate(cut_jp = factor(
+      cut, 
+      levels = c("Fair", "Good", "Very Good", "Premium", "Ideal"),
+      labels = c("フェア", "グッド", "ベリーグッド", 
+                 "プレミアム", "アイディアル"))) %>% 
+    ggplot(aes(x = cut_jp, y = depth)) +
+    geom_boxplot() +
+    labs(x = "カット", y = "深さ")
+plot(p3_3a)
+```
+
+箱ひげ図の向きを横向きにしたいときは、作った図に `coord_flip()` を使えば良い。
+
+```{r}
+p3_4 <- p3_3 + coord_flip()
+plot(p3_4)
+```
+
+このように、`coord_flip()` は横軸と縦軸を入れ替えてくれる。箱ひげ図以外でも使える。
+
+また、`aes()` の `x`と`y` を入れ替えることで、向きを変えることもできる。
+
+```{r}
+p4 <- ggplot(diamonds, aes(x = depth, y = cut)) +
+    geom_boxplot() +
+    labs(x = "カット", y = "深さ")
+plot(p4)
+```
+
+これらの例からわかるとおり、作図に用いる変数の指定は、`aes()` で行う。**aes** とは <u>aes</u>thetics（美感、見た目）のことである。この `aes()` の指定の仕方は作る図によって異なる。したがって、ggplot2 の使い方をマスターするには、geom ごとに異なるaes の使い方を覚える必要がある。覚えるといっても、必ずしも暗記する必要なない。頻繁に使うものは覚えたほうが楽（自然に覚える）が、その他のものについては上で紹介したチートシートやインターネット上にまとめられた情報（たとえば、[ココ](https://qiita.com/yutannihilation/items/e1b9249541fc57b60705) や[ココ](https://ggplot2.tidyverse.org/reference/)）で確認すればよい。
+
+## 作成した図の保存 {#sec-savefig}
+
+作成した図は、PDFファイルやPNGファイルなどの外部ファイルに保存することができる。プロジェクト内に、図を保存するための **figs** というディレクトリ（フォルダ）を新たに作り、図をその中に保存しよう。
+
+```{r}
+#| eval: false
+dir.create("figs")
+```
+
+図はPDFとして保存することが望ましい（理由の説明は省略するが、一言で述べれば「ベクター画像」が望ましいから）ので、PDFファイルでの保存方法のみ説明する。
+
+::: callout-important
+図のファイルを作るときは、あらかじめ図のサイズ（幅 \[width\] と高さ \[height\]）を決めておくことが重要である。いいかげんなサイズで図を作り、後で拡大・縮小すると、軸ラベルの文字などが伸びたり縮んだりして汚くなるので、スマートではない。
+:::
+
+基本的には、以下の3つのステップで図を保存する。
+
+1.  図を保存するためのファイルを開く（作る）
+2.  図をファイルに書き込む
+3.  ファイルを閉じる
+
+これら3つのステップは**セットで**行う。Quarto (R Markdown) を使っている場合は特に注意が必要で、**各ステップを1つずつ実行しても図が保存されない**。 そこで、3つのステップを1つのコードチャンクの中にまとめて書き、以下のいずれかの方法で**チャンク全体を一挙に実行する必要がある**。
+
+-   ショートカットを使う
+    -   `command` + `shift` + `return` (macOS)
+    -   `Ctrl` + `Shift` + `Enter` （どのOSでも）
+-   チャンク右上の実行ボタン (Run Current Chunk) をクリックする
+
+PDF形式の図を保存するには、`cairo_pdf()` という関数を使うのが便利である。 先ほど作ったヒストグラム `p2_6` を、PDFファイルに保存しよう。 ファイル名は、`hist_eg1.pdf` にしよう。図の大きさは、A4用紙の半ページよりやや小さくなるように、幅 (width) を5インチ (127.0mm)、高さ (height) を4インチ (101.6mm) にする。軸ラベルに日本語を使っているので、日本語を表示できるフォントを指定する必要があるが、上で `library(tidyverse)` を実行した直後に **fontregregisterer** パッケージを利用して `theme_set()` で指定したフォント（Linux は IPAexゴシック、macOS は ヒラギノ角ゴシック、Windows は游ゴシック）が使われる。 第1ステップの内容をまとめると、次のようになる（**第1ステップだけで実行しない!!!**）。
+
+```{r}
+#| eval: false
+cairo_pdf(file = "figs/hist_eg1.pdf",
+          width = 5, height = 4)
+```
+
+**file** の `figs/` という部分が、figs ディレクトリ（フォルダ）の中にファイルを作ることを指示している。
+
+第2ステップは、第1ステップの直後に `print(p2_6)` とすればよい。
+
+最後に、ファイルを閉じるために、`dev.off()` を実行する。
+
+以上をまとめると、次のようになる。qmd (Rmd) ファイルを使っている場合は、以下の**コードチャンクを一挙に実行する必要がある**（Rスクリプトでは1行ずつ実行してよい）。
+
+```{r}
+#| eval: false
+cairo_pdf(file = "figs/hist_eg1.pdf",
+          width = 5, height = 4)
+print(p2_6)
+dev.off()
+```
+
+これで図 (`p2_6`) が保存されるはずだ。figsディレクトリの中に、`hist_eg1.pdf` というPDFファイルができていることを確かめよう。また、PDFファイルを開いて図が保存されていることも確認しよう。
+
+:::callout-note
+macOS を使っているなら、`cairo_pdf()` の代わりに `quartz()` を使うこともできる。`quartz()` を使う場合は、
+
+```{r}
+#| eval: false
+quartz(file = "figs/hist_eg1.pdf", 
+       type = "pdf", family = "HiraginoSans-W3",
+       width = 5, height = 4)
+print(p2_6)
+dev.off()
+```
+のようにする。
+:::
+
+## よく使う図の作り方 {#sec-commonfig}
+
+ggplotの使い方を身につけるために、統計学でよく使う基本的な図を作ってみよう。
+
+例として、[fake_score.csv](http://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) という架空のデータを使おう。このデータに含まれる変数は、以下の通りである。
+
+-   id: 個人識別番号。
+-   class: クラス。1組から8組まで。
+-   gender: 性別。女 (female) か男 (male) か。
+-   math: 数学の試験の得点。
+-   english: 英語の試験の得点。
+-   chemistry: 化学の試験の得点。
+
+まず、データを保存するためのディレクトリを作る。既にプロジェクト内に data ディレクトリがある場合（これまでの実習をすべて実行していれば、既にあるはずである）、このコマンドは実行しなくてよい。
+
+```{r}
+#| eval: false
+dir.create("data")
+```
+
+次に、データをダウンロードする。以下のコードはWindows では失敗する可能性が高いので、[ココを右クリック](https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) して対象をファイルに保存する。保存先はプロジェクトフォルダの中の data フォルダにする（ダウンロードした後にファイルを移動してもよい）。
+
+```{r}
+#| eval: false
+download.file(
+  url = "https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv",
+  destfile = "data/fake_score.csv"
+)
+```
+
+データを読み込む。
+
+```{r}
+#| message: false
+myd <- read_csv("data/fake_score.csv")
+```
+
+データの中身を確認する。
+
+```{r}
+glimpse(myd)
+```
+
+正しくデータが読み込めたようだ。このデータを使い、作図の方法を学習しよう。
+
+この時点でデータが正しく読み込めていない場合は、ウェブブラウザで [fake_score.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) をダウンロードし、ダウンロードしたファイルを手動でプロジェクト内のデータフォルダの中に移動してから、以下を実行し直そう。 もう一度データを読み込む。
+
+```{r}
+#| eval: false
+myd <- read_csv("data/fake_score.csv")
+glimpse(myd)
+```
+
+### 棒グラフ {#sec-barchart}
+
+棒グラフ (bar plot) は `geom_bar()` で作る。まず、クラスごとの人数を棒グラフにしてみよう。 横軸にクラス、縦軸にはクラスの人数を表示する。そのために、次のコマンドを使う。
+
+```{r}
+bar1 <- ggplot(myd, aes(x = class)) +
+    geom_bar() +
+    labs(x = "クラス", y = "人数")
+```
+
+表示してみよう。
+
+```{r}
+plot(bar1)
+```
+
+各クラスの人数が、等しく50人ずつであることがわかる。
+
+横軸のクラスの数字1から8のうち、表示されていない数字がある。`scale_x_continuous()` を使って、すべて表示させよう。**既に作った bar1 を基に**、新しい図を作る。
+
+```{r}
+bar2 <- bar1 + 
+    scale_x_continuous(breaks = 1:8)
+```
+
+表示してみよう。
+
+```{r}
+plot(bar2)
+```
+
+クラスの数字をすべて表示することができた。
+
+男女の内訳はどうなっているだろうか。男女を色分けして描き、図で確かめよう。 データセットに含まれる gender という変数を使って色分けするために、`aes` の**中**で `fill` を指定する。
+
+```{r}
+bar3 <- ggplot(myd, aes(x = class, fill = gender)) +
+    geom_bar() +
+    labs(x = "クラス", y = "人数") +
+    scale_x_continuous(breaks = 1:8)
+plot(bar3)
+```
+
+女子の方が多いクラスと男子の方が多いクラスがあるようだ。 凡例 (legend) が英語になっているので、日本語に直そう。ついでに利用するカラーパレットも変える。
+
+```{r}
+bar4 <- bar3 + 
+    scale_fill_brewer(palette = "Accent",
+                      name = "性別", 
+                      labels = c("女", "男"))
+plot(bar4)
+```
+
+この棒グラフでは男女の数の比較が難しいので、男女の棒を並べて描きたい。そのために、`position = "dodge"` を指定する。
+
+```{r}
+bar5 <-  ggplot(myd, aes(x = class, fill = gender)) +
+    geom_bar(position = "dodge") +
+    labs(x = "クラス", y = "人数") + 
+    scale_x_continuous(breaks = 1:8) +
+    scale_fill_brewer(palette = "Set2",
+                      name = "性別", 
+                      labels = c("女", "男"))
+plot(bar5)
+```
+
+これで、クラス1からクラス4までは女子が20人で男子が30人だが、残りのクラスでは男女の数が逆転していることがわかる。
+
+### ヒストグラム {#sec-histogram}
+
+ヒストグラム (histogram) は、ある変数の分布の仕方を確かめる際に最も便利な図である。 既に説明した通り、ヒストグラムを作るには `geom_histogram()` を使う。
+
+#### 基本的な使い方
+
+まず、数学の点数をヒストグラムにしてみよう。
+
+```{r}
+hist1 <- ggplot(myd, aes(x = math)) +
+    geom_histogram() +
+    labs(x = "数学の点数", y = "人数")
+plot(hist1)
+```
+
+このままだと、ヒストグラムの一つひとつの棒 (bin) の区切りが分かりにくいので、棒の縁に色をつけよう。 既に説明したとおり、縁取りの色は`color` で指定する。このとき、変数によって色を変えるのではなく、自分で設定した色を使うため、`aes`の**外**で `color` を指定する（上での棒グラフの例では、`aes`の中で `fill` を指定した）。
+
+```{r}
+hist2 <- ggplot(myd, aes(x = math)) +
+    geom_histogram(color = "black") +
+    labs(x = "数学の点数", y = "人数")
+plot(hist2)
+```
+
+次に棒の幅 (bin width) を変えてみよう。**binwidth** を指定することで、棒の幅を設定できる。試しに、10点ごとにしてみよう。
+
+```{r}
+hist3 <- ggplot(myd, aes(x = math)) +
+    geom_histogram(color = "black", binwidth = 10) +
+    labs(x = "数学の点数", y = "人数")
+plot(hist3)
+```
+
+#### 縦軸を確率密度に変える
+
+上で説明したとおり、`y` に `after_stat(density)` を指定することで、縦軸を確率密度 (probability density) に変えることができる。
+
+```{r}
+hist4 <- ggplot(myd, aes(x = math, y = after_stat(density))) +
+    geom_histogram(color = "black", binwidth = 10) +
+    labs(x = "数学の点数", y = "確率密度")
+plot(hist4)
+```
+
+縦軸が確率密度のヒストグラムができた。
+
+#### 複数の geom を重ねる
+
+数学の点数の平均値は、
+
+```{r}
+mean(myd$math)
+```
+
+である。これを図に書き加えよう。
+
+まず、`geom_vline()` で、平均値の位置に縦線を加える。 <u>v</u>lineの**v** はvertical（垂直）を示す。 `geom_vline()`で縦線の位置を決めるために、**xintercept**（x切片、つまり、線が横軸と交わる位置）を指定する。
+
+```{r}
+hist5 <- hist3 + 
+    geom_vline(xintercept = mean(myd$math), 
+               color = "red")
+plot(hist5)
+```
+
+次に、平均値の値を（小数第一位までに丸めて \[round\] して）書き込む。 日本語を使うので、`family` でフォントを指定する必要がある。
+
+```{r}
+hist6 <- hist5 + 
+    geom_text(aes(x = 70, y = 90, 
+                  label = str_c("平均値：", round(mean(myd$math), 1))),
+              color = "red", 
+              family = my_font)
+```
+
+表示する。
+
+```{r}
+plot(hist6)
+```
+
+#### facet でグループを分ける
+
+数学の点数のヒストグラムを、クラスごとに分けて描いてみよう。そのために、`facet_wrap()` を使う。
+
+```{r}
+hist7 <- hist3 + 
+    facet_wrap(vars(class))
+plot(hist7)
+```
+
+このように、クラスごとにヒストグラムができる。
+
+### 箱ひげ図 {#sec-boxplot}
+
+ヒストグラムは分布の形状を確かめるのに便利だが、上で作った `hist7` のように、複数のグループの分布を比較するのには少し不便である。 そこで異なるグループの分布を比較するときによく使われるのが、箱ひげ図 (box\[-and-whisker\] plot) である。箱ひげ図は、五数要約（最小値、第1四分位数、中央値、第3四分位数、最大値）と外れ値（「1.5 $\times$ IQRルール」で判定される）を図で表現するものである。
+
+箱ひげ図は、`geom_boxplot()` で作る。このとき、aes には `x`（比較するグループを表す変数）と`y`（作図の対象となる変数）を指定する（`x`の代わりに `group` を使うこともできる）。ここで、class の中身の数字には数値としての意味はなく、単にクラス分けのための記号にすぎないことを gpplotに伝えるために `as.factor()` を使う（本当はデータ前処理の時点で　id と class は factor にしておくことが望ましいが、今回はこれで妥協する）。既に説明したとおり、横向きにしたいときは、`x` と`y` を入れ替えれば良い。
+
+```{r}
+box1 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_boxplot() +
+    labs(x = "クラス", y = "数学の点数") 
+plot(box1)
+```
+
+これで、グループ間で数学の点数の五数を比較しやすくなった。
+
+### バイオリンプロット {#sec-violinplot}
+
+箱ひげ図でグループ間比較がしやすくなったが、ヒストグラムとは異なり、分布の形状がわからなくなってしまった。この不満を解消してくれるのが、バイオリンプロット (violin plot) である。`geom_violin()` で作る。
+
+```{r}
+vln1 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_violin() +
+    labs(x = "クラス", y = "数学の点数") 
+plot(vln1)
+```
+
+この図は、ヒストグラムを横倒しにしてその概形を滑らかな線で表したものと、それを鏡に写したものが合わさってできている。バイオリンプロットの幅が広い（狭い）ところが、ヒストグラムの山が高い（低い）ところである。
+
+### 箱ひげ図とバイオリンプロットの重ね描き {#sec-overlay}
+
+バイオリンプロットは、分布の形状がわからないという箱ひげ図の弱点を克服しているものの、箱ひげ図では一目でわかった中央値や四分位範囲がわからないという弱点がある。両者の長所を活かすため、二つの図を重ねて描いてみよう。
+
+```{r}
+bv1 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_boxplot() +
+    geom_violin() +
+    labs(x = "クラス", y = "数学の点数") 
+plot(bv1)
+```
+
+バイロリンプロットが箱ひげ図の線に重なり、箱ひげ図がよく見えない。箱ひげ図をバイオリンプロットの上に（手前に）描いたほうがよさそうだ。ggplotでは、**後に加えた要素（層）が上になる**ので、`geom_violin()` の後に `geom_boxplot()` を書く。
+
+```{r}
+bv2 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_violin() +
+    geom_boxplot() +
+    labs(x = "クラス", y = "数学の点数") 
+plot(bv2)
+```
+
+今度は、箱がバイオリンの線に重なってしまっている。`geom_boxplot()` で **width** を指定し、箱の幅を狭くしてみよう。
+
+```{r}
+bv3 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_violin() +
+    geom_boxplot(width = 0.3) +
+    labs(x = "クラス", y = "数学の点数") 
+plot(bv3)
+```
+
+これで、箱ひげ図とバイロリンプロットが同時に確認できるようになった。しかし、このままでは箱ひげ図が目立たないので、色を変えよう。
+
+```{r}
+bv4 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_violin() +
+    geom_boxplot(width = 0.3, fill = "gray") +
+    labs(x = "クラス", y = "数学の点数") 
+plot(bv4)
+```
+
+この図を見れば、数学の点数の分布をクラス間で比較できる。
+
+### ビースウォームプロット（蜂群図） {#sec-beeswarm}
+
+箱ひげ図とバイオリンプロットで、グループ間の分布を比較できるようになった。しかし、観測値が実際にどの値をとったかはわからない。この問題を克服するために使われるのが、ビースウォームプロット (bee swarm plot) である。
+
+ggplotを使ってビースウォームプロットを描くには、**ggbeeswarm** というパッケージを導入するのが簡単だ。 まず、インストールする（既にインストール済みなら、このコマンドは実行しなくてよい）。
+
+```{r}
+#| eval: false
+install.packages("ggbeeswarm")
+```
+
+インストールが済んだら、パッケージを読み込む。
+
+```{r}
+library(ggbeeswarm)
+```
+
+ビースウォームプロットは、`geom_beeswarm()`または`geom_quasirandom()` で描く。 これら二つの違いは、点の散らし方である。実際に作って比べてみよう。
+
+```{r}
+bee1 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_beeswarm() +
+    labs(x = "クラス", y = "数学の点数") 
+plot(bee1)
+```
+
+```{r}
+bee2 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
+    geom_quasirandom() +
+    labs(x = "クラス", y = "数学の点数") 
+plot(bee2)
+```
+
+ビースウォームプロットでは、全く同じか近い値をとった観測値が重ならないよう、点を散らして (jittering) くれる。その散らし方が、二つの geom で異なる。
+
+これらの図により、分布の中で実際に観測値がどこにあるかが明らかになった。ビースウォームプロットを、箱ひげ図とバイロリンプロットに重ねてみよう。
+
+```{r}
+bee3 <- bv4 + geom_quasirandom()
+plot(bee3)
+```
+
+点のせいで箱ひげ図がの線が見えにくいなら、(1) 点の色を変えるか、(2) 点の透明度を上げてみよう。透明度は `alpha` で指定する。`alpha = 1/3` とすると、点が3つ重なったときに透明度が0（つまり、普通の色）になるなるようになる。
+
+両方同時にやってみよう。
+
+```{r}
+bee4 <- bv4 + 
+    geom_quasirandom(color = "skyblue", alpha = 3/5)
+plot(bee4)
+```
+
+男女の点の色を変えてみよう。
+
+```{r, fig.width = 6}
+bee5 <- bv4 + 
+    geom_quasirandom(aes(color = gender),
+                     alpha = 2/3) +
+    scale_color_brewer(palette = "Dark2",
+                       name = "性別", 
+                       labels = c("女", "男"))
+plot(bee5)
+```
+
+これで、分布の形状と五数だけでなく、実際の観測値がどこにあるかまで明らかにできた。
+
+### 散布図 {#sec-scatterplot}
+
+ここまでは、1つの変数を可視化するグラフを作ってきた。続いて、2変数の関係を可視化してみよう。
+
+2変数（2つの量的変数）の関係を可視化するための最も基本的な図は散布図 (scatter plot) である。散布図は、`geom_point()` で作る。散布図の`aes`には、横軸の変数 `x` と縦軸の変数 `y` を指定する。
+
+数学の点数（横軸）と英語の点数（縦軸）の関係を散布図にしみてよう。
+
+```{r}
+scat1 <- ggplot(myd, aes(x = math, y = english)) +
+    geom_point() +
+    labs(x = "数学の得点", y = "英語の得点")
+plot(scat1)
+```
+
+英語も数学も100点満点の試験なのに、図が横長になっていて数学の得点の範囲の方が広く見えてしまう。 この点を改善するために、`xlim()` と `ylim()` で横軸と縦軸の範囲を指定し、`coord_fixed(ratio = 1)` で縦横比を1:1にしよう（ratio = 1 はデフォルトなので、単に `coord_fixed()` でもいいが、比がはっきりわかるようにここでは明示しておく）。
+
+```{r}
+scat2 <- scat1 + 
+    xlim(0, 100) + 
+    ylim(0, 100) +
+    coord_fixed(ratio = 1)
+plot(scat2)
+```
+
+男女の点を、色 (color) と形 (shape) で区別してみよう。
+
+まず、色で区別する。
+
+```{r}
+scat3 <- ggplot(myd, 
+                aes(x = math,
+                    y = english, 
+                    color = gender)) +
+    geom_point() +
+    labs(x = "数学の得点", 
+         y = "英語の得点") +
+    scale_color_discrete(name = "性別", 
+                         labels = c("女", "男")) +
+    xlim(0, 100) +
+    ylim(0, 100) + 
+    coord_fixed(ratio = 1)
+plot(scat3)
+```
+
+これで一応色分けはできたが、色があまり気に入らない。 特に、赤と緑を区別できない人がいると思われるので、`scale_color_brewer()` で色使い (color paletter) を **Accent** に変えてみよう。指定できるパレットについては、[このページ](http://www.sthda.com/english/wiki/colors-in-r) を参照されたい。
+
+```{r}
+scat3a <- ggplot(myd, 
+                 aes(x = math, 
+                     y = english, 
+                     color = gender)) +
+    geom_point() +
+    labs(x = "数学の得点", 
+         y = "英語の得点") +
+    scale_color_brewer(palette = "Accent",
+                       name = "性別", 
+                       labels = c("女", "男")) +
+    xlim(0, 100) + 
+    ylim(0, 100) + 
+    coord_fixed(ratio = 1)
+plot(scat3a)
+```
+
+色分けができた。試しにもう1つ異なるパレットを作ってみよう。`Set1` を使ってみる。
+
+```{r}
+scat3b <- ggplot(myd, 
+                 aes(x = math, 
+                     y = english, 
+                     color = gender)) +
+    geom_point() +
+    labs(x = "数学の得点", 
+         y = "英語の得点") +
+    scale_color_brewer(palette = "Set1", 
+                       name = "性別", 
+                       labels = c("女", "男")) +
+    xlim(0, 100) + 
+    ylim(0, 100) + 
+    coord_fixed(ratio = 1)
+plot(scat3b)
+```
+
+「男は青で女は赤」というステレオタイプ（偶然そうなってしまっただけだが）が気にいらないなら、色を逆にしてみよう。パレットに用意された色を使う順番を、`direction = -1` で逆順にできる。
+
+```{r}
+scat3c <- ggplot(myd, 
+                 aes(x = math, 
+                     y = english, 
+                     color = gender)) +
+    geom_point() +
+    labs(x = "数学の得点", 
+         y = "英語の得点") +
+    scale_color_brewer(palette = "Set1", 
+                       direction = -1,
+                       name = "性別",
+                       labels = c("女", "男")) +
+    xlim(0, 100) + 
+    ylim(0, 100) +
+    coord_fixed(ratio = 1)
+plot(scat3c)
+```
+
+次に、形 (shape) で区別する。
+
+```{r}
+scat4 <- ggplot(myd, 
+                aes(x = math, 
+                    y = english, 
+                    shape = gender)) +
+    geom_point() +
+    labs(x = "数学の得点", 
+         y = "英語の得点") +
+    scale_shape_discrete(name = "性別", 
+                         labels = c("女", "男")) +
+    xlim(0, 100) +
+    ylim(0, 100) + 
+    coord_fixed(ratio = 1)
+plot(scat4)
+```
+
+最後に、色と形で区別する。
+
+```{r}
+scat5 <- ggplot(myd, 
+                aes(x = math,
+                    y = english,
+                    color = gender,
+                    shape = gender)) +
+    geom_point() +
+    labs(x = "数学の得点",
+         y = "英語の得点") +
+    scale_color_brewer(palette = "Accent", 
+                       direction = -1,
+                       name = "性別", 
+                       labels = c("女", "男")) +
+    scale_shape_discrete(name = "性別", 
+                         labels = c("女", "男")) +
+    xlim(0, 100) + 
+    ylim(0, 100) + 
+    coord_fixed(ratio = 1)
+plot(scat5)
+```
+
+このように、ggplot2を使えば**簡単**に**綺麗**な図を作ることができる。
+
+慣れるまではggplot2での作図を面倒に感じるかもしれないが、慣れてしまえばggplotが手放せなくなるだろう。

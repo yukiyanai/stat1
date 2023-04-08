@@ -1,0 +1,48 @@
+project:
+  type: book
+  output-dir: docs
+language: jayy.yml
+  
+book: 
+  title: "KUT 統計学1"
+  author: "矢内 勇生"
+  date: "April 8, 2022"
+  sidebar: 
+    style: docked
+    background: light
+  page-navigation: true
+  page-footer: 
+    center: "Copyright 2023, Yuki Yanai"
+    background: light
+    border: false
+  search: true
+  site-url: https://yukiyanai.github.io/stat1/
+  repo-url: https://github.com/yukiyanai/stat1/
+  repo-branch: main
+  sharing: [twitter, facebook]
+  chapters: 
+    - index.qmd
+    - intro-to-R.qmd
+    - intro-to-RStudio.qmd
+    - descriptive-stat.qmd
+    - intro-to-ggplot2.qmd
+    - intro-to-quarto.qmd
+    - discrete-distributions.qmd
+    - continuous-distributions.qmd
+    - rv-n-dist.qmd
+    - stat-dist.qmd
+format:
+  html:
+    theme: yeti
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    highlight-style: arrow
+    html-math-method: mathjax
+    code-link: true
+    fig-width: 5
+    fig-height: 4
+    link-external-newwindow: true
+
+crossref:
+  ref-hyperlink: true
