@@ -46,19 +46,19 @@
 
 授業の内容は、8つのトピックに分かれている。[シラバス (PDF)](https://yukiyanai.github.io/jp/classes/stat1/docs/syllabus-stat1_2023-1Q.pdf) にはトピックごとの予習課題と参考文献が記載されている。 各トピックとこのウェブ資料の対応は以下の通りである。
 
-| トピック                          | ウェブ資料                                                               |
+| トピック                          | ウェブ資料                               |
 |:-----------------------------------|:-----------------------------------|
-| 1\. イントロダクション            |                                                                          |
-| 2\. Rの基本操作                   | [Rの基本操作](intro-to-R.html)                                           |
-|                                   | [RStudio入門](intro-to-RStudio.html)                                     |
-| 3\. データの種類と記述統計        | [記述統計](descriptive-stat.html)                                        |
-|                                   | [ggplot2入門](intro-to-ggplo2.html)                                      |
-|                                   | [Quarto入門](intro-to-quarto.html)                                       |
-| 4\. 離散分布                      | [離散分布](discrete-distributions.html)                                  |
-| 5\. 連続分布                      | [連続分布](continuous-distributions.html)                                |
-| 6\. 確率変数と確率分布.           | [確率変数と確率分布](rv-n-dist.html)                                     |
-| 7\. 分布の代表値                  | [分布の代表値](stat-dist.html)                                           |
-| 8\. まとめ                        | なし                                                                     |
+| 1\. イントロダクション            |                                          |
+| 2\. Rの基本操作                   | [Rの基本操作](intro-to-R.html)           |
+|                                   | [RStudio入門](intro-to-RStudio.html)     |
+| 3\. データの種類と記述統計        | [記述統計](descriptive-stat.html)        |
+|                                   | [Quarto入門](intro-to-quarto.html)       |
+| 4\. 離散分布                      | [離散分布](discrete-distributions.html)  |  
+|                                   | [ggplot2入門](intro-to-ggplo2.html)      |
+| 5\. 連続分布                      | [連続分布](continuous-distributions.html)|
+| 6\. 確率変数と確率分布.           | [確率変数と確率分布](rv-n-dist.html)     |
+| 7\. 分布の代表値                  | [分布の代表値](stat-dist.html)           |
+| 8\. まとめ                        | なし                                     |
 
 :::callout-warning
 一部の例外を除いて、各ページ（各章）の内容を実行するために必要なパッケージはページの冒頭で読み込むことにする。ページの途中から実行しても動かないことがあると思われるので、その際はページの最初から実行してほしい。

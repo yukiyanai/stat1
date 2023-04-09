@@ -89,7 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro-to-ggplot2.html" rel="next">
+<link href="./intro-to-quarto.html" rel="next">
 <link href="./intro-to-RStudio.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -184,12 +184,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-to-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot2 入門</span></a>
+  <a href="./intro-to-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto 入門</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-to-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Quarto 入門</span></a>
+  <a href="./intro-to-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ggplot2 入門</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -290,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>パッケージの読み込みには、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> を使う。パッケージの読み込みは、R (RStudio) を起動するたびに行う必要がある。つまり、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> はそのパッケージを使う場合には毎回実行する必要がある。また、複数の qmd で同じパッケージを使う場合には、それぞれの qmdファイルに<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> でパッケージを読み込む命令を書いておく必要がある（qmd ファイルについては <a href="intro-to-quarto.html">6章</a> で説明する）。</p>
+<p>パッケージの読み込みには、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> を使う。パッケージの読み込みは、R (RStudio) を起動するたびに行う必要がある。つまり、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> はそのパッケージを使う場合には毎回実行する必要がある。また、複数の qmd で同じパッケージを使う場合には、それぞれの qmdファイルに<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> でパッケージを読み込む命令を書いておく必要がある（qmd ファイルについては <a href="intro-to-quarto.html">5章</a> で説明する）。</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -578,7 +578,7 @@ $ income &lt;dbl&gt; 3475810, 457018, 1627793, 6070642, 1083052, 2984929, 148106
 </ul></section><section id="sec-viz1" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="sec-viz1">
 <span class="header-section-number">4.1.4</span> 変数の可視化</h3>
 <p>変数の特徴は統計量によってある程度把握することができるが、統計量だけではわかりにくい特徴もある。そこで、データ分析を行う際には、図を作って自分が持っているデータを可視化するという作業が必要かつ重要である。</p>
-<p>今日は、<strong>ggplot2</strong>パッケージを使って、簡単な図をいくつか作ってみよう。<strong>ggplot2</strong>は先ほど読み込んだ <strong>tidyverse</strong> の一部なので、新たに読み込む必要はない。また、<strong>ggplot2</strong>の詳しい使い方は<a href="intro-to-ggplot2.html">5章</a>」で解説する。 ここではコードの中身まで理解しなくてもよい。</p>
+<p>今日は、<strong>ggplot2</strong>パッケージを使って、簡単な図をいくつか作ってみよう。<strong>ggplot2</strong>は先ほど読み込んだ <strong>tidyverse</strong> の一部なので、新たに読み込む必要はない。また、<strong>ggplot2</strong>の詳しい使い方は<a href="intro-to-ggplot2.html">7章</a>」で解説する。 ここではコードの中身まで理解しなくてもよい。</p>
 <p>まず、最も基本的かつよく使う図であるヒストグラム　(histogram) を作ってみよう。 ggplot2では <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> でヒストグラムを作ることができる。</p>
 <p>例として、身長のヒストグラムを描いてみよう。</p>
 <div class="cell">
@@ -864,8 +864,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro-to-ggplot2.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot2 入門</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./intro-to-quarto.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto 入門</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

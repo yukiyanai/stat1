@@ -1,4 +1,59 @@
 # Quarto 入門
 
+**今回の目標**
 
-準備中
+-  Quarto 文書 (.qmd) から PDF (.pdf) 文書を作成する方法を理解しよう！
+-  基本的なマークダウンファイルの使い方を身につけよう！
+
+## qmd ファイルを render してレポートを作る {#sec-rmd1}
+
+Quarto を利用したマークダウンファイル (.qmd) の作り方と書き方は後で説明する。その前に、マークダウンファイルを書いた後、それを他の形式のファイルに出力する（言い換えると、レポートとして提出可能な状態に変換する）方法を説明する。
+
+
+### Quarto 文書をPDFファイルに出力する {#sec-pdf}
+
+Quarto 文書 (.qmd) からPDF (.pdf) ファイルを作るためにはTeXが必要である。
+KUTの情報演習室にはTeX Live がインストールされているので、何もする必要はない。
+
+::: callout-tip
+数式や図表を含む論文を書く際には、LaTeX を使うことが多い。LaTeX を利用するためには、TeX Live（macOS の場合は MacTeX でも可）をインストールする（無料）。インストール方法は [ココ](https://texwiki.texjp.org/?TeX%20Live) で説明されている。TeX Live (MacTeX) をインストールするなら、`install_tinytex()` を実行してはいけない。 実行してしまったが TeX Live に切り替えたいという場合は、`tinytex::uninstall_tinytex()` を実行して tinytex をアンインストールしてから、TeX Live をインストールしよう。
+:::
+
+::: callout-note
+TeXを使った経験がなく、パソコンにTeXがインストールされていない場合は、以下のコマンドを実行してTeX環境を整える。それなりに時間がかかるので気長に待とう。**大学のパソコンを使う場合は以下のコマンドを実行してはいけない！！**
+
+```{r tinylatex}
+#| eval: false
+tinytex::install_tinytex()
+```
+:::
+
+
+さっそく、サンプルファイル　[stat1_qmd_sample.qmd](https://drive.google.com/file/d/1195KxRQuTzmcZL9LMzm5flhoVL1MzA2D/view?usp=sharing) を "stat1_qmd_sample.pdf" に変換してみよう。
+
+まず、[リンク](https://drive.google.com/file/d/1195KxRQuTzmcZL9LMzm5flhoVL1MzA2D/view?usp=sharing) から Quartoドキュメント（拡張子が .qmd のファイル）をダウンロードする。次に、ダウンロードしたファイルを授業用のプロジェクトのフォルダに移動する。移動できたら、RStudio の右下の "Files" タブでからそのファイルを開こう。開いたら、コード編集画面の上にある "Render" ボタンを押せばPDFができる（初めて実行するときは、足りないパッケージを自動でインストールするので、時間がかかるかもしれない）。
+
+:::callout-tip
+ダウンロードしたファイルは通常「ダウンロード (Downloads)」という名前のフォルダに保存されている。
+これをプロジェクトのフォルダに移動するためには、macOS ならファインダ（Finder）、Windows なら Explorer（エクスプローラー）と呼ばれるファイル表示アプリを利用してファイルを移動すればよい。ファインダやエクスプローラーを開くのが面倒なら、RStudio 右下の "Files" タブを利用してファイルを移動してもよい。
+
+Linux や macOS でコマンドラインが使えるなら（RStudio にも "Terminal" タブが用意されている！）、`mv` で移動することもできる。
+:::
+
+出力されたPDFファイルは（他のディレクトリを指定しない限り）元のqmdファイルと同じディレクトリ（プロジェクトのフォルダ。ダウンロードしたファイルを移動せずにそのまま開いた場合は「ダウンロード」フォルダ）に保存される。出来上がったPDFファイルをAdobe Readerやskim 等のPDFリーダで開いて確認してみよう。
+
+うまくいけば [stat1_qmd_sample_success.pdf](https://drive.google.com/file/d/10ovcbV_V7fNxNsQkLeIUzZMjpETiADfd/view?usp=sharing) と同じ（ような）ファイルができるはずである。
+
+
+## Quarto 文書によるレポート作成 {#sec-rmd2}
+
+Quarto文書をPDFに変換する方法がわかったところで、Quarto文書の書き方を覚えよう。
+
+
+RStudio では、上部のメニューから \[File\] -\> \[New File\] -\> \[Quarto Document...\] を選ぶと、新しいQuarto文書を作ることができる。 ファイルを開くことができたら、名前をつけて保存しよう。 このファイルの拡張子は `.qmd` にする。
+
+このウェブ資料も、.qmd ファイルから作られているが .qmd ファイルの書き方を .qmd ファイル内で説明すると混乱するので、以降の説明は [quarto-basics.html](https://yukiyanai.github.io/jp/classes/stat1/docs/quarto-basics.html) に記載する。
+
+Quarto文書 (.qmdファイル）の書き方を説明する上のページ（.html ファイル）の元となった.qmdファイルは [quarto-basics.qmd](https://drive.google.com/file/d/11TuNnK8KS9GAyucQl2hCcKbMUXXKv9EP/view?usp=share_link) である。また、同じファイルをPDFに変換すると、[quarto-basics.pdf](https://drive.google.com/file/d/11UixGKxAFbFOfmElXfLVVaLaldmx8bM7/view?usp=share_link) ができる。元の`.qmd` ファイルと、それを元に作られた `.pdf` ファイル、`.html` ファイルの3つをよく比べてみよう。
+
+この授業の課題の作成には、Quarto文書の利用が必須である。 そこで、今後の授業で使えるテンプレートを配布する。 [stat1_template2023.qmd](https://drive.google.com/file/d/11UqTpnFMX4yTypJwtZUSTfIgfDdvvZrX/view?usp=sharing) をダウンロードし、YAML ヘッダやグローバルチャンクオプションをそのまま利用してほしい。
