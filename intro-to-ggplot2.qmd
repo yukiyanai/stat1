@@ -466,12 +466,12 @@ plot(p3_3)
 Fair, Good なども日本語にすることもできるが、今回は覚えなくて良い（私にはダイヤモンドの知識がまったくないのでよくわからないが、ネットで検索した限りだと、Fair の訳は フェア、Good の訳は グッド、 ... で日本語にする意味がなさそう）。一応できるということを見せるために、コードは載せておく（このコードは今は理解しなくてよい）。
 
 ```{r}
-p3_3a <- diamonds %>% 
+p3_3a <- diamonds |> 
     mutate(cut_jp = factor(
       cut, 
       levels = c("Fair", "Good", "Very Good", "Premium", "Ideal"),
       labels = c("フェア", "グッド", "ベリーグッド", 
-                 "プレミアム", "アイディアル"))) %>% 
+                 "プレミアム", "アイディアル"))) |> 
     ggplot(aes(x = cut_jp, y = depth)) +
     geom_boxplot() +
     labs(x = "カット", y = "深さ")
