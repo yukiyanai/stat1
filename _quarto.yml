@@ -26,8 +26,8 @@ book:
     - intro-to-RStudio.qmd
     - descriptive-stat.qmd
     - intro-to-quarto.qmd
-    - discrete-distributions.qmd
     - intro-to-ggplot2.qmd
+    - discrete-distributions.qmd
     - continuous-distributions.qmd
     - rv-n-dist.qmd
     - stat-dist.qmd

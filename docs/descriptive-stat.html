@@ -189,12 +189,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discrete-distributions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">離散分布</span></a>
+  <a href="./intro-to-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ggplot2 入門</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-to-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ggplot2 入門</span></a>
+  <a href="./discrete-distributions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">離散分布</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -346,13 +346,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>次にデータセット <a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">fake_data_01.csv</a> をダウンロードし、今作った data フォルダの中に保存する。</p>
+<p>次にデータセット <a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">fake_data_01.csv</a> をダウンロードし、今作った data フォルダの中に保存する。ファイル (<code>fake_data_01.csv</code>) を<a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">ここ</a> から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。 大学のパソコンでは、ダウンロードしたファイルが「ダウンロード」フォルダに保存されているので、エクスプローラーを開き、対象ファイルを「ダウンロード」からプロジェクト内の「data」フォルダに移動する。</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+備考
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードによって、Rでデータファイルをダウンロードすることもできる。</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span></span>
 <span>  url <span class="op">=</span> <span class="st">"https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv"</span>,</span>
 <span>  destfile <span class="op">=</span> <span class="st">"data/fake_data_01.csv"</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>ダウンロードがうまくいかない（あるいは、次の読み込み段階で失敗する）場合は、ファイル (<code>fake_data_01.csv</code>) を<a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">ここ</a> から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。</p>
+<p>しかし、この方法は大学のパソコンではうまくいなかいので、授業では上に書かれた方法で手動でダウンロードするように。</p>
+</div>
+</div>
 <p>このデータは CSVと呼ばれる形式で保存されているので、<code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>という関数を使ってこのデータセットを読み込むことができる（他の形式で保存されたデータの使い方は必要に応じて後の授業で解説する）。</p>
 <p>このデータセットを <code>myd</code> という名前で利用することにしよう（これはデータセットのファイル名を変えるのではなく、R上での呼び名を決めているだけである）。</p>
 <div class="cell">
@@ -577,7 +590,7 @@ $ income &lt;dbl&gt; 3475810, 457018, 1627793, 6070642, 1083052, 2984929, 148106
 </ul></section><section id="sec-viz1" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="sec-viz1">
 <span class="header-section-number">4.1.4</span> 変数の可視化</h3>
 <p>変数の特徴は統計量によってある程度把握することができるが、統計量だけではわかりにくい特徴もある。そこで、データ分析を行う際には、図を作って自分が持っているデータを可視化するという作業が必要かつ重要である。</p>
-<p>今日は、<strong>ggplot2</strong>パッケージを使って、簡単な図をいくつか作ってみよう。<strong>ggplot2</strong>は先ほど読み込んだ <strong>tidyverse</strong> の一部なので、新たに読み込む必要はない。また、<strong>ggplot2</strong>の詳しい使い方は<a href="intro-to-ggplot2.html">7章</a>」で解説する。 ここではコードの中身まで理解しなくてもよい。</p>
+<p>今日は、<strong>ggplot2</strong>パッケージを使って、簡単な図をいくつか作ってみよう。<strong>ggplot2</strong>は先ほど読み込んだ <strong>tidyverse</strong> の一部なので、新たに読み込む必要はない。また、<strong>ggplot2</strong>の詳しい使い方は<a href="intro-to-ggplot2.html">6章</a>」で解説する。 ここではコードの中身まで理解しなくてもよい。</p>
 <p>まず、最も基本的かつよく使う図であるヒストグラム　(histogram) を作ってみよう。 ggplot2では <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> でヒストグラムを作ることができる。</p>
 <p>例として、身長のヒストグラムを描いてみよう。</p>
 <div class="cell">

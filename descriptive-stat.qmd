@@ -52,7 +52,7 @@ theme_set(theme_gray(base_size = 9,
 
 Linux ユーザ（[IPAexフォント](https://moji.or.jp/ipafont/) が利用可能である場合）は、
 ```{r}
-#| message: false
+#| eval: false
 theme_set(theme_gray(base_size = 9,
                      base_family = "IPAexGothic"))
 ```
@@ -60,7 +60,7 @@ theme_set(theme_gray(base_size = 9,
 
 macOS ユーザは、
 ```{r}
-#| eval: false
+#| message: false
 theme_set(theme_gray(base_size = 9,
                      base_family = "HiraginoSans-W3"))
 ```
@@ -101,16 +101,20 @@ names(windowsFonts())
 dir.create("data")
 ```
 
-次にデータセット [fake_data_01.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) をダウンロードし、今作った data フォルダの中に保存する。
+次にデータセット [fake_data_01.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) をダウンロードし、今作った data フォルダの中に保存する。ファイル (`fake_data_01.csv`) を[ここ](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。
+大学のパソコンでは、ダウンロードしたファイルが「ダウンロード」フォルダに保存されているので、エクスプローラーを開き、対象ファイルを「ダウンロード」からプロジェクト内の「data」フォルダに移動する。
 
+:::callout-note
+以下のコードによって、Rでデータファイルをダウンロードすることもできる。
 ```{r}
 #| eval: false
 download.file(
   url = "https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv",
   destfile = "data/fake_data_01.csv")
 ```
+しかし、この方法は大学のパソコンではうまくいなかいので、授業では上に書かれた方法で手動でダウンロードするように。
+:::
 
-ダウンロードがうまくいかない（あるいは、次の読み込み段階で失敗する）場合は、ファイル (`fake_data_01.csv`) を[ここ](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。
 
 このデータは CSVと呼ばれる形式で保存されているので、`readr::read_csv()`という関数を使ってこのデータセットを読み込むことができる（他の形式で保存されたデータの使い方は必要に応じて後の授業で解説する）。
 
@@ -284,7 +288,7 @@ fivenum(myd$height)
 
 変数の特徴は統計量によってある程度把握することができるが、統計量だけではわかりにくい特徴もある。そこで、データ分析を行う際には、図を作って自分が持っているデータを可視化するという作業が必要かつ重要である。
 
-今日は、**ggplot2**パッケージを使って、簡単な図をいくつか作ってみよう。**ggplot2**は先ほど読み込んだ **tidyverse** の一部なので、新たに読み込む必要はない。また、**ggplot2**の詳しい使い方は[7章](intro-to-ggplot2.html)」で解説する。
+今日は、**ggplot2**パッケージを使って、簡単な図をいくつか作ってみよう。**ggplot2**は先ほど読み込んだ **tidyverse** の一部なので、新たに読み込む必要はない。また、**ggplot2**の詳しい使い方は[6章](intro-to-ggplot2.html)」で解説する。
 ここではコードの中身まで理解しなくてもよい。
 
 まず、最も基本的かつよく使う図であるヒストグラム　(histogram) を作ってみよう。 ggplot2では `geom_histogram()` でヒストグラムを作ることができる。

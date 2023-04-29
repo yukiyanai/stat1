@@ -128,8 +128,8 @@ str(myd)
 練習のために、`df1`という名前のデータフレーム (data.frame) と、`df2`という名前のtibble を作ってみよう。まず、`x` と`y` という2つの変数をもつ `df1` を作る。
 
 ```{r}
-df1 <- data.frame(x = 1:100, 
-                  y = 100:1)
+df1 <- data.frame(x = 1 : 100, 
+                  y = 100 : 1)
 is.data.frame(df1)
 ```
 
@@ -139,7 +139,7 @@ is.data.frame(df1)
 glimpse(df1)
 ```
 
-`x` と `y` という変数があり、それぞれが `<int>` すなわち整数 (integer) 型であることがわかる。また、データは100行2列である。
+`x` と `y` という変数があり、それぞれが `\<int\>` すなわち整数 (integer) 型であることがわかる。また、データは100行2列である。
 
 次に、`v1`, `v2`, `v3` という3つの変数をもつ `df2` を `tibble()` で作る。`rnorm(n, mean, sd)` で、平均が`mean`、標準偏差が`sd` の正規分布から `n` 個の乱数を生成することができる（詳しくは、後半のトピックで説明する）。
 
@@ -156,15 +156,15 @@ is.data.frame(df2)
 glimpse(df2)
 ```
 
-`v1`, `v2`, `v3` という3つの変数があり、それぞれが `<dbl>` すなわち実数型であることがわかる。このデータフレームは100行3列である。
+`v1`, `v2`, `v3` という3つの変数があり、それぞれが `\<dbl\>` すなわち実数型であることがわかる。このデータフレームは100行3列である。
 
 ::: callout-note
-`<dbl>` というのは、double precision floating point number type（倍精度浮動小数点数型）のことである。この授業で必要な範囲では、実数 (real number) であると考えて差し支えない。この他に授業で出てくる変数の型は、
+`\<dbl\>` というのは、double precision floating point number type（倍精度浮動小数点数型）のことである。この授業で必要な範囲では、実数 (real number) であると考えて差し支えない。この他に授業で出てくる変数の型は、
 
--   `<int>`: integer（整数型）
--   `<lgl>`: logical（論理型）
--   `<chr>`: character（文字列型）
--   `<fct>`: factor（因子型）
+-   `\<int\>`: integer（整数型）
+-   `\<lgl\>`: logical（論理型）
+-   `\<chr\>`: character（文字列型）
+-   `\<fct\>`: factor（因子型）
 
 それぞれ登場したときに必要な範囲で説明するが、詳しくは「プログラミング」の授業で勉強してほしい。
 :::
@@ -306,7 +306,8 @@ plot(p1_1)
 散布図は、`geom_point()` でできる。
 
 ```{r}
-p1_2 <- p1_1 + geom_point()
+p1_2 <- p1_1 + 
+  geom_point()
 ```
 
 このように、前に作ったものに `+` で何かを加えることで、ggplot に新たな要素を追加することができる。この時点で、作った図を表示してみよう。
@@ -364,7 +365,8 @@ plot(p2_1)
 ここに、ヒストグラムを作るための層 (layer) を加える。ヒストグラムは、`geom_histogram()` でできる。
 
 ```{r}
-p2_2 <- p2_1 + geom_histogram()
+p2_2 <- p2_1 + 
+  geom_histogram()
 ```
 
 この時点で表示してみよう。
@@ -381,7 +383,7 @@ p2_3 <- p2_1 +
 plot(p2_3)
 ```
 
-ビンの境が見えにくいので、ビンの縁に黒色をつけよう。ビンの縁取りは `color` で指定する。`color` で指定するのはビンの中身の色ではないので注意しよう。
+ビンの境が見えにくいので、ビンの縁に黒色をつけよう。ビンの縁取りは `color` で指定する。`color` で指定するのはビンの中身を塗りつぶす色ではないので注意しよう。
 
 ```{r}
 p2_4 <- p2_1 + 
@@ -452,14 +454,16 @@ plot(p3_1)
 次に、`geom_boxplot()` で箱ひげ図の層を加える。
 
 ```{r}
-p3_2 <- p3_1 + geom_boxplot() 
+p3_2 <- p3_1 +
+  geom_boxplot() 
 plot(p3_2)
 ```
 
 軸ラベルを日本語にする。
 
 ```{r}
-p3_3 <- p3_2 + labs(x = "カット", y = "深さ")
+p3_3 <- p3_2 + 
+  labs(x = "カット", y = "深さ")
 plot(p3_3)
 ```
 
@@ -481,7 +485,8 @@ plot(p3_3a)
 箱ひげ図の向きを横向きにしたいときは、作った図に `coord_flip()` を使えば良い。
 
 ```{r}
-p3_4 <- p3_3 + coord_flip()
+p3_4 <- p3_3 + 
+  coord_flip()
 plot(p3_4)
 ```
 
@@ -586,8 +591,10 @@ ggplotの使い方を身につけるために、統計学でよく使う基本�
 dir.create("data")
 ```
 
-次に、データをダウンロードする。以下のコードはWindows では失敗する可能性が高いので、[ココを右クリック](https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) して対象をファイルに保存する。保存先はプロジェクトフォルダの中の data フォルダにする（ダウンロードした後にファイルを移動してもよい）。
+次に、データをダウンロードする[ココをクリック](https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) して対象をファイルに保存する。保存先はプロジェクトフォルダの中の data フォルダにする（ダウンロードした後にファイルを移動してもよい）。
 
+:::callout-note
+コマンドでダウンロードする場合には、次のコードを実行する。大学のパソコンではうまくいなかいので、実行しないように。
 ```{r}
 #| eval: false
 download.file(
@@ -595,8 +602,9 @@ download.file(
   destfile = "data/fake_score.csv"
 )
 ```
+:::
 
-データを読み込む。
+ダウンロードしたデータを読み込む。
 
 ```{r}
 #| message: false
@@ -610,14 +618,6 @@ glimpse(myd)
 ```
 
 正しくデータが読み込めたようだ。このデータを使い、作図の方法を学習しよう。
-
-この時点でデータが正しく読み込めていない場合は、ウェブブラウザで [fake_score.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) をダウンロードし、ダウンロードしたファイルを手動でプロジェクト内のデータフォルダの中に移動してから、以下を実行し直そう。 もう一度データを読み込む。
-
-```{r}
-#| eval: false
-myd <- read_csv("data/fake_score.csv")
-glimpse(myd)
-```
 
 ### 棒グラフ {#sec-barchart}
 
