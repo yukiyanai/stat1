@@ -53,7 +53,7 @@
 |                                   | [RStudio入門](intro-to-RStudio.html)     |
 | 3\. データの種類と記述統計        | [記述統計](descriptive-stat.html)        |
 |                                   | [Quarto入門](intro-to-quarto.html)       |
-| 4\. 離散分布                      | [ggplot2入門](intro-to-ggplo2.html)      |
+| 4\. 離散分布                      | [ggplot2入門](intro-to-ggplot2.html)      |
 |                                   | [離散分布](discrete-distributions.html)  |
 | 5\. 連続分布                      | [連続分布](continuous-distributions.html)|
 | 6\. 確率変数と確率分布.           | [確率変数と確率分布](rv-n-dist.html)     |

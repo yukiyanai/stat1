@@ -286,7 +286,7 @@ die100 |>
 この分布を図にしよう。
 ```{r}
 D2 <- tibble(res = die100)
-hist_die <- ggplot(D2, aes(x = res, after_stat(density))) +
+hist_die <- ggplot(D2, aes(x = res, y = after_stat(density))) +
   geom_histogram(color = "black", bins = 6) +
   labs(x = "出た目", y = "割合") +
   scale_x_continuous(breaks = 1 : 6,
