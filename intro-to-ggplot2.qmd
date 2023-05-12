@@ -22,7 +22,7 @@ ggplot2 で図を作るためには、**データフレーム (data frame)** と
 CSV形式で保存されたデータセットをもっているなら、`readr::read_csv()` や `read.csv()` などでそのデータを読み込めば、データフレームができる。
 
 ::: callout-note
-**readr** パッケージも tidyverse に含まれているので、tidyverse を読み込み済みならあらためて `librar(readr)` を実行する必要はない。 このように、tidyverse はデータ分析でよく使うツールをまとめて提供しており、便利である。 詳しくは、『私たちのR』「[データハンドリング](http://www.jaysong.net/RBook/datahandling1.html)」 を参照されたい。
+**readr** パッケージも tidyverse に含まれているので、tidyverse を読み込み済みならあらためて `library(readr)` を実行する必要はない。 このように、tidyverse はデータ分析でよく使うツールをまとめて提供しており、便利である。 詳しくは、『私たちのR』「[データハンドリング](http://www.jaysong.net/RBook/datahandling1.html)」 を参照されたい。
 :::
 
 例として、前にも使った [fake_data_01.csv](http://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) を読み込んでみよう。プロジェクト内の data ディレクトリ（フォルダ）に `fake_data_01.csv` があることを想定している。
@@ -852,71 +852,6 @@ plot(bv4)
 
 この図を見れば、数学の点数の分布をクラス間で比較できる。
 
-### ビースウォームプロット（蜂群図） {#sec-beeswarm}
-
-箱ひげ図とバイオリンプロットで、グループ間の分布を比較できるようになった。しかし、観測値が実際にどの値をとったかはわからない。この問題を克服するために使われるのが、ビースウォームプロット (bee swarm plot) である。
-
-ggplotを使ってビースウォームプロットを描くには、**ggbeeswarm** というパッケージを導入するのが簡単だ。 まず、インストールする（既にインストール済みなら、このコマンドは実行しなくてよい）。
-
-```{r}
-#| eval: false
-install.packages("ggbeeswarm")
-```
-
-インストールが済んだら、パッケージを読み込む。
-
-```{r}
-library(ggbeeswarm)
-```
-
-ビースウォームプロットは、`geom_beeswarm()`または`geom_quasirandom()` で描く。 これら二つの違いは、点の散らし方である。実際に作って比べてみよう。
-
-```{r}
-bee1 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
-    geom_beeswarm() +
-    labs(x = "クラス", y = "数学の点数") 
-plot(bee1)
-```
-
-```{r}
-bee2 <- ggplot(myd, aes(x = as.factor(class), y = math)) +
-    geom_quasirandom() +
-    labs(x = "クラス", y = "数学の点数") 
-plot(bee2)
-```
-
-ビースウォームプロットでは、全く同じか近い値をとった観測値が重ならないよう、点を散らして (jittering) くれる。その散らし方が、二つの geom で異なる。
-
-これらの図により、分布の中で実際に観測値がどこにあるかが明らかになった。ビースウォームプロットを、箱ひげ図とバイロリンプロットに重ねてみよう。
-
-```{r}
-bee3 <- bv4 + geom_quasirandom()
-plot(bee3)
-```
-
-点のせいで箱ひげ図がの線が見えにくいなら、(1) 点の色を変えるか、(2) 点の透明度を上げてみよう。透明度は `alpha` で指定する。`alpha = 1/3` とすると、点が3つ重なったときに透明度が0（つまり、普通の色）になるなるようになる。
-
-両方同時にやってみよう。
-
-```{r}
-bee4 <- bv4 + 
-    geom_quasirandom(color = "skyblue", alpha = 3/5)
-plot(bee4)
-```
-
-男女の点の色を変えてみよう。
-
-```{r, fig.width = 6}
-bee5 <- bv4 + 
-    geom_quasirandom(aes(color = gender),
-                     alpha = 2/3) +
-    scale_color_brewer(palette = "Dark2",
-                       name = "性別", 
-                       labels = c("女", "男"))
-plot(bee5)
-```
-
-これで、分布の形状と五数だけでなく、実際の観測値がどこにあるかまで明らかにできた。
 
 ### 散布図 {#sec-scatterplot}
 
