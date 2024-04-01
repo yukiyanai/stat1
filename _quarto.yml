@@ -6,13 +6,13 @@ language: jayy.yml
 book: 
   title: "KUT 統計学1"
   author: "矢内 勇生"
-  date: "April 8, 2023"
+  date: "2023年4月8日（改訂：2024年4月1日）"
   sidebar: 
     style: docked
     background: light
   page-navigation: true
   page-footer: 
-    center: "Copyright 2023, Yuki Yanai"
+    center: "Copyright 2023−2024, Yuki Yanai"
     background: light
     border: false
   search: true

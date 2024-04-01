@@ -8,26 +8,19 @@
 
 - 大切なことは授業で説明する。この資料にすべて書かれているわけではない。
 - この資料に書かれていない内容も授業で説明する。よって、この資料に書かれていない事項でも授業で説明した内容はすべて試験範囲である。
-- 受講生全員が [教科書](index.html#sec-textbook) と [KUTLMS](https://lms.kochi-tech.ac.jp/course/view.php?id=3195) で配布する予習・復習用資料 の指定範囲を読んでいるという前提で授業を進め、試験を実施する。教科書と予習・復習用資料（以下、教科書等）の内容をこのウェブ資料で詳しく説明することはないので、必ず教科書等を読むように。
+- 受講生全員が [教科書](index.html#sec-textbook) と [KUTLMS](https://lms.kochi-tech.ac.jp/course/view.php?id=3775) で配布する予習・復習用資料 の指定範囲を読んでいるという前提で授業を進め、試験を実施する。教科書と予習・復習用資料（以下、教科書等）の内容をこのウェブ資料で詳しく説明することはないので、必ず教科書等を読むように。
 :::
 
  
 ## 基本情報 {#sec-basicinfo}
 
--   シラバス（講義要項）：[PDF](https://yukiyanai.github.io/jp/classes/stat1/docs/syllabus-stat1_2023-1Q.pdf)
-
--   [講義スライド](https://drive.google.com/drive/folders/16qxZoX7a8GcxbmMmt5582_xd2vpcXiCi?usp=share_link)
-    - 　各授業（講義動画公開）の**後**に最新版をアップロードする
-    - 　講義動画は [KUTLMS](https://lms.kochi-tech.ac.jp/course/view.php?id=3195) で配布する
+- シラバス（講義要項）：[PDF](https://yukiyanai.github.io/jp/classes/stat1/docs/syllabus-stat1_2024-1Q.pdf)
+- 講義動画と講義スライドは [KUTLMS](https://lms.kochi-tech.ac.jp/course/view.php?id=3775) で配布する
     
-:::callout-warning
-一般公開用のスライドでは一部の情報がカットされているので、正規受講生（単位を取得したい者）は [KUTLMS](https://lms.kochi-tech.ac.jp/course/view.php?id=3195) で完全版を入手すること
-:::
-
--   [KUTLMS](https://lms.kochi-tech.ac.jp/course/view.php?id=3195)
+-   [KUTLMS](https://lms.kochi-tech.ac.jp/course/view.php?id=3775)
     -   登録キーはポータルで通知する
--   [授業用のSlackグループ](https://kut-stat1-2023.slack.com)
-    -   [登録](https://join.slack.com/t/kut-stat1-2023/signup) には大学ドメイン のメールアドレスが必要
+-   [授業用のSlackグループ](https://kut-stat1-2024.slack.com)
+    -   [登録](https://join.slack.com/t/kut-stat1-2024/signup) には大学ドメイン のメールアドレスが必要
 
 ## 教科書・副読本 {#sec-refs}
 
@@ -44,7 +37,7 @@
 
 ## 講義トピックとウェブ資料の対応 {#sec-topics}
 
-授業の内容は、8つのトピックに分かれている。[シラバス (PDF)](https://yukiyanai.github.io/jp/classes/stat1/docs/syllabus-stat1_2023-1Q.pdf) にはトピックごとの予習課題と参考文献が記載されている。 各トピックとこのウェブ資料の対応は以下の通りである。
+授業の内容は、8つのトピックに分かれている。[シラバス (PDF)](https://yukiyanai.github.io/jp/classes/stat1/docs/syllabus-stat1_2024-1Q.pdf) にはトピックごとの予習課題と参考文献が記載されている。 各トピックとこのウェブ資料の対応は以下の通りである。
 
 | トピック                          | ウェブ資料                               |
 |:-----------------------------------|:-----------------------------------|
