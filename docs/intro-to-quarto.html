@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.542">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>KUT 統計学1 - 5&nbsp; Quarto 入門</title>
 <style>
@@ -305,7 +305,7 @@ Tip
 <p>RStudio では、上部のメニューから [File] -&gt; [New File] -&gt; [Quarto Document…] を選ぶと、新しいQuarto文書を作ることができる。 ファイルを開くことができたら、名前をつけて保存しよう。 このファイルの拡張子は <code>.qmd</code> にする。</p>
 <p>このウェブ資料も、.qmd ファイルから作られているが .qmd ファイルの書き方を .qmd ファイル内で説明すると混乱するので、以降の説明は <a href="https://yukiyanai.github.io/jp/classes/stat1/docs/quarto-basics.html">quarto-basics.html</a> に記載する。</p>
 <p>Quarto文書 (.qmdファイル）の書き方を説明する上のページ（.html ファイル）の元となった.qmdファイルは <a href="https://drive.google.com/file/d/11TuNnK8KS9GAyucQl2hCcKbMUXXKv9EP/view?usp=share_link">quarto-basics.qmd</a> である。また、同じファイルをPDFに変換すると、<a href="https://drive.google.com/file/d/11UixGKxAFbFOfmElXfLVVaLaldmx8bM7/view?usp=share_link">quarto-basics.pdf</a> ができる。元の<code>.qmd</code> ファイルと、それを元に作られた <code>.pdf</code> ファイル、<code>.html</code> ファイルの3つをよく比べてみよう。</p>
-<p>この授業の課題の作成には、Quarto文書の利用が必須である。 そこで、今後の授業で使えるテンプレートを配布する。 <a href="https://drive.google.com/file/d/11UqTpnFMX4yTypJwtZUSTfIgfDdvvZrX/view?usp=sharing">stat1_template2023.qmd</a> をダウンロードし、YAML ヘッダやグローバルチャンクオプションをそのまま利用してほしい。</p>
+<p>この授業の課題の作成には、Quarto文書の利用が必須である。 そこで、今後の授業で使えるテンプレートを配布する。 <a href="https://drive.google.com/file/d/10979nW0WGN_Wpv6KPaT8Dyf0hnluUHzH/view?usp=drive_link">stat1_template2024.qmd</a> をダウンロードし、YAML ヘッダやグローバルチャンクオプションをそのまま利用してほしい。</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -487,7 +487,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -708,12 +713,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./descriptive-stat.html" class="pagination-link  aria-label=">
+      <a href="./descriptive-stat.html" class="pagination-link" aria-label="記述統計">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">記述統計</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro-to-ggplot2.html" class="pagination-link" aria-label="<span class='chapter-number'>6</span>&nbsp; <span class='chapter-title'>ggplot2 入門</span>">
+      <a href="./intro-to-ggplot2.html" class="pagination-link" aria-label="ggplot2 入門">
         <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ggplot2 入門</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

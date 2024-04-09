@@ -25,7 +25,7 @@ CSV形式で保存されたデータセットをもっているなら、`readr::
 **readr** パッケージも tidyverse に含まれているので、tidyverse を読み込み済みならあらためて `library(readr)` を実行する必要はない。 このように、tidyverse はデータ分析でよく使うツールをまとめて提供しており、便利である。 詳しくは、『私たちのR』「[データハンドリング](http://www.jaysong.net/RBook/datahandling1.html)」 を参照されたい。
 :::
 
-例として、前にも使った [fake_data_01.csv](http://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) を読み込んでみよう。プロジェクト内の data ディレクトリ（フォルダ）に `fake_data_01.csv` があることを想定している。
+例として、前にも使った [fake_data_01.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) を読み込んでみよう。プロジェクト内の data ディレクトリ（フォルダ）に `fake_data_01.csv` があることを想定している。
 
 ```{r}
 #| message: false
@@ -209,7 +209,7 @@ data()
 
 ### ggplot2 とは何か {#sec-wiggplt}
 
-**ggplot2** は、Rで**綺麗な**図を作るためのパッケージである。 Posit（旧RStudio）のChief Scientist である [Hadley Wickham](http://hadley.nz/) が大学院生時代に開発・公開し、アップデートを重ねてきたものである（Hadley は **tidyverse** などの重要パッケージ開発の中心人物であり、世界中のRユーザから最も尊敬されている人物だと考えられる。日本の一部のRユーザは彼を「羽鳥先生」と呼ぶ）。
+**ggplot2** は、Rで**綺麗な**図を作るためのパッケージである。 Posit（旧RStudio）のChief Scientist である [Hadley Wickham](https://hadley.nz/) が大学院生時代に開発・公開し、アップデートを重ねてきたものである（Hadley は **tidyverse** などの重要パッケージ開発の中心人物であり、世界中のRユーザから最も尊敬されている人物だと考えられる。日本の一部のRユーザは彼を「羽鳥先生」と呼ぶ）。
 
 ggplot2 の *gg* は　***G**rammar of **G**raphics*（図のための文法） という意味で、一貫した方法で様々な図が作れるように工夫されている。 最初は文法を覚えるのに少し苦労するかもしれない。しかし、一度文法を身につけてしまえば、様々な図を簡単に作れるようになるので、とても便利である。また、デフォルト（既定）の設定でそれなりに綺麗な図が作れるのも魅力である（某表計算ソフトのように、何も考えずに 3D棒グラフのような醜い図を作ってしまうということが防げる）。
 
@@ -575,7 +575,7 @@ dev.off()
 
 ggplotの使い方を身につけるために、統計学でよく使う基本的な図を作ってみよう。
 
-例として、[fake_score.csv](http://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) という架空のデータを使おう。このデータに含まれる変数は、以下の通りである。
+例として、[fake_score.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv) という架空のデータを使おう。このデータに含まれる変数は、以下の通りである。
 
 -   id: 個人識別番号。
 -   class: クラス。1組から8組まで。

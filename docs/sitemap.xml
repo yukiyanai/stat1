@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yukiyanai.github.io/stat1/index.html</loc>
-    <lastmod>2024-04-01T08:17:42.461Z</lastmod>
+    <lastmod>2024-04-01T08:17:42.000Z</lastmod>
   </url>
   <url>
     <loc>https://yukiyanai.github.io/stat1/intro-to-R.html</loc>
@@ -18,11 +18,11 @@
   </url>
   <url>
     <loc>https://yukiyanai.github.io/stat1/intro-to-quarto.html</loc>
-    <lastmod>2023-04-09T07:25:08.000Z</lastmod>
+    <lastmod>2024-04-09T03:16:47.604Z</lastmod>
   </url>
   <url>
     <loc>https://yukiyanai.github.io/stat1/intro-to-ggplot2.html</loc>
-    <lastmod>2023-05-12T06:37:07.000Z</lastmod>
+    <lastmod>2024-04-09T03:21:24.276Z</lastmod>
   </url>
   <url>
     <loc>https://yukiyanai.github.io/stat1/discrete-distributions.html</loc>

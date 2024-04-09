@@ -56,4 +56,4 @@ RStudio では、上部のメニューから \[File\] -\> \[New File\] -\> \[Qua
 
 Quarto文書 (.qmdファイル）の書き方を説明する上のページ（.html ファイル）の元となった.qmdファイルは [quarto-basics.qmd](https://drive.google.com/file/d/11TuNnK8KS9GAyucQl2hCcKbMUXXKv9EP/view?usp=share_link) である。また、同じファイルをPDFに変換すると、[quarto-basics.pdf](https://drive.google.com/file/d/11UixGKxAFbFOfmElXfLVVaLaldmx8bM7/view?usp=share_link) ができる。元の`.qmd` ファイルと、それを元に作られた `.pdf` ファイル、`.html` ファイルの3つをよく比べてみよう。
 
-この授業の課題の作成には、Quarto文書の利用が必須である。 そこで、今後の授業で使えるテンプレートを配布する。 [stat1_template2023.qmd](https://drive.google.com/file/d/11UqTpnFMX4yTypJwtZUSTfIgfDdvvZrX/view?usp=sharing) をダウンロードし、YAML ヘッダやグローバルチャンクオプションをそのまま利用してほしい。
+この授業の課題の作成には、Quarto文書の利用が必須である。 そこで、今後の授業で使えるテンプレートを配布する。 [stat1_template2024.qmd](https://drive.google.com/file/d/10979nW0WGN_Wpv6KPaT8Dyf0hnluUHzH/view?usp=drive_link) をダウンロードし、YAML ヘッダやグローバルチャンクオプションをそのまま利用してほしい。

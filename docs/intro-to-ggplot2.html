@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.542">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>KUT 統計学1 - 6&nbsp; ggplot2 入門</title>
 <style>
@@ -317,7 +317,7 @@ Note
 <p><strong>readr</strong> パッケージも tidyverse に含まれているので、tidyverse を読み込み済みならあらためて <code><a href="https://readr.tidyverse.org">library(readr)</a></code> を実行する必要はない。 このように、tidyverse はデータ分析でよく使うツールをまとめて提供しており、便利である。 詳しくは、『私たちのR』「<a href="http://www.jaysong.net/RBook/datahandling1.html">データハンドリング</a>」 を参照されたい。</p>
 </div>
 </div>
-<p>例として、前にも使った <a href="http://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">fake_data_01.csv</a> を読み込んでみよう。プロジェクト内の data ディレクトリ（フォルダ）に <code>fake_data_01.csv</code> があることを想定している。</p>
+<p>例として、前にも使った <a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">fake_data_01.csv</a> を読み込んでみよう。プロジェクト内の data ディレクトリ（フォルダ）に <code>fake_data_01.csv</code> があることを想定している。</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/fake_data_01.csv"</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -500,9 +500,9 @@ $ y &lt;int&gt; 100, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85,
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 3
-$ v1 &lt;dbl&gt; -1.62068701, -4.53965836, 2.72655172, 4.18409375, 2.47665415, -3.14…
-$ v2 &lt;dbl&gt; -1.7097274, 3.1437492, -5.0627078, -4.3500739, -9.7997014, 2.828231…
-$ v3 &lt;dbl&gt; 0.9056309, 0.1226920, -1.2252902, 1.1700922, 0.7705519, 1.0573854, …</code></pre>
+$ v1 &lt;dbl&gt; -10.9731071, -0.4302221, -1.2946723, 2.5072384, -9.4495840, -1.3612…
+$ v2 &lt;dbl&gt; -6.6774955, -3.3219460, -2.3135018, -4.1581850, -1.1788912, -8.0035…
+$ v3 &lt;dbl&gt; -0.82907966, -0.72324463, -1.72551167, -0.07417346, 0.09012720, 1.2…</code></pre>
 </div>
 </div>
 <p><code>v1</code>, <code>v2</code>, <code>v3</code> という3つの変数があり、それぞれが <code>\&lt;dbl\&gt;</code> すなわち実数型であることがわかる。このデータフレームは100行3列である。</p>
@@ -572,7 +572,7 @@ $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1
 <span class="header-section-number">6.3</span> ggplot2の基礎</h2>
 <section id="sec-wiggplt" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-wiggplt">
 <span class="header-section-number">6.3.1</span> ggplot2 とは何か</h3>
-<p><strong>ggplot2</strong> は、Rで<strong>綺麗な</strong>図を作るためのパッケージである。 Posit（旧RStudio）のChief Scientist である <a href="http://hadley.nz/">Hadley Wickham</a> が大学院生時代に開発・公開し、アップデートを重ねてきたものである（Hadley は <strong>tidyverse</strong> などの重要パッケージ開発の中心人物であり、世界中のRユーザから最も尊敬されている人物だと考えられる。日本の一部のRユーザは彼を「羽鳥先生」と呼ぶ）。</p>
+<p><strong>ggplot2</strong> は、Rで<strong>綺麗な</strong>図を作るためのパッケージである。 Posit（旧RStudio）のChief Scientist である <a href="https://hadley.nz/">Hadley Wickham</a> が大学院生時代に開発・公開し、アップデートを重ねてきたものである（Hadley は <strong>tidyverse</strong> などの重要パッケージ開発の中心人物であり、世界中のRユーザから最も尊敬されている人物だと考えられる。日本の一部のRユーザは彼を「羽鳥先生」と呼ぶ）。</p>
 <p>ggplot2 の <em>gg</em> は　<em><strong>G</strong>rammar of <strong>G</strong>raphics</em>（図のための文法） という意味で、一貫した方法で様々な図が作れるように工夫されている。 最初は文法を覚えるのに少し苦労するかもしれない。しかし、一度文法を身につけてしまえば、様々な図を簡単に作れるようになるので、とても便利である。また、デフォルト（既定）の設定でそれなりに綺麗な図が作れるのも魅力である（某表計算ソフトのように、何も考えずに 3D棒グラフのような醜い図を作ってしまうということが防げる）。</p>
 <p>ggplot2 についての詳しい説明は、Hadley自身が書いた <em>ggplot2: Elegant Graphics for Data Analysis, 3rd edition.</em> (Springer) で読むことができる（オンラインで<a href="https://ggplot2-book.org/">無料で公開</a> されている）。</p>
 <p>また、チートシート（<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/japanese/data-visualization_ja.pdf">日本語版</a>; <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf">英語版</a>）が公開されているので、ダウンロードしていつでも見られるようにしておくと、便利である。</p>
@@ -1006,7 +1006,7 @@ Note
 </section><section id="sec-commonfig" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="sec-commonfig">
 <span class="header-section-number">6.5</span> よく使う図の作り方</h2>
 <p>ggplotの使い方を身につけるために、統計学でよく使う基本的な図を作ってみよう。</p>
-<p>例として、<a href="http://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv">fake_score.csv</a> という架空のデータを使おう。このデータに含まれる変数は、以下の通りである。</p>
+<p>例として、<a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_score.csv">fake_score.csv</a> という架空のデータを使おう。このデータに含まれる変数は、以下の通りである。</p>
 <ul>
 <li>id: 個人識別番号。</li>
 <li>class: クラス。1組から8組まで。</li>
@@ -1709,7 +1709,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1930,12 +1935,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./intro-to-quarto.html" class="pagination-link  aria-label=">
+      <a href="./intro-to-quarto.html" class="pagination-link" aria-label="Quarto 入門">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto 入門</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./discrete-distributions.html" class="pagination-link" aria-label="<span class='chapter-number'>7</span>&nbsp; <span class='chapter-title'>離散分布</span>">
+      <a href="./discrete-distributions.html" class="pagination-link" aria-label="離散分布">
         <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">離散分布</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
