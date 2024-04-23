@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.542">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>KUT 統計学1 - 6&nbsp; ggplot2 入門</title>
 <style>
@@ -500,9 +500,9 @@ $ y &lt;int&gt; 100, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85,
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 3
-$ v1 &lt;dbl&gt; -10.9731071, -0.4302221, -1.2946723, 2.5072384, -9.4495840, -1.3612…
-$ v2 &lt;dbl&gt; -6.6774955, -3.3219460, -2.3135018, -4.1581850, -1.1788912, -8.0035…
-$ v3 &lt;dbl&gt; -0.82907966, -0.72324463, -1.72551167, -0.07417346, 0.09012720, 1.2…</code></pre>
+$ v1 &lt;dbl&gt; -0.79418216, 0.06491534, 5.60915184, 9.82041020, -3.25366367, 6.192…
+$ v2 &lt;dbl&gt; 0.28109454, -5.20475923, -7.34814326, -0.64354823, 6.18839817, -10.…
+$ v3 &lt;dbl&gt; -0.4656054, -0.6198187, -0.4829328, 1.2257612, 0.3932428, -0.111598…</code></pre>
 </div>
 </div>
 <p><code>v1</code>, <code>v2</code>, <code>v3</code> という3つの変数があり、それぞれが <code>\&lt;dbl\&gt;</code> すなわち実数型であることがわかる。このデータフレームは100行3列である。</p>
@@ -1709,12 +1709,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1935,12 +1930,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./intro-to-quarto.html" class="pagination-link" aria-label="Quarto 入門">
+      <a href="./intro-to-quarto.html" class="pagination-link  aria-label=">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto 入門</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./discrete-distributions.html" class="pagination-link" aria-label="離散分布">
+      <a href="./discrete-distributions.html" class="pagination-link" aria-label="<span class='chapter-number'>7</span>&nbsp; <span class='chapter-title'>離散分布</span>">
         <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">離散分布</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

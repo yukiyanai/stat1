@@ -29,9 +29,9 @@ tinytex::install_tinytex()
 :::
 
 
-さっそく、サンプルファイル　[stat1_qmd_sample.qmd](https://drive.google.com/file/d/1195KxRQuTzmcZL9LMzm5flhoVL1MzA2D/view?usp=sharing) を "stat1_qmd_sample.pdf" に変換してみよう。
+さっそく、サンプルファイル　[stat1_qmd_sample.qmd](https://drive.google.com/file/d/10I6zTSflNz1q3V1JNYZ3w6lKjELbLDF7/view?usp=sharing) を "stat1_qmd_sample.pdf" に変換してみよう。
 
-まず、[リンク](https://drive.google.com/file/d/1195KxRQuTzmcZL9LMzm5flhoVL1MzA2D/view?usp=sharing) から Quartoドキュメント（拡張子が .qmd のファイル）をダウンロードする。次に、ダウンロードしたファイルを授業用のプロジェクトのフォルダに移動する。移動できたら、RStudio の右下の "Files" タブでからそのファイルを開こう。開いたら、コード編集画面の上にある "Render" ボタンを押せばPDFができる（初めて実行するときは、足りないパッケージを自動でインストールするので、時間がかかるかもしれない）。
+まず、[リンク](https://drive.google.com/file/d/10I6zTSflNz1q3V1JNYZ3w6lKjELbLDF7/view?usp=sharing) から Quartoドキュメント（拡張子が .qmd のファイル）をダウンロードする。次に、ダウンロードしたファイルを授業用のプロジェクトのフォルダに移動する。移動できたら、RStudio の右下の "Files" タブでからそのファイルを開こう。開いたら、コード編集画面の上にある "Render" ボタンを押せばPDFができる（初めて実行するときは、足りないパッケージを自動でインストールするので、時間がかかるかもしれない）。
 
 :::callout-tip
 ダウンロードしたファイルは通常「ダウンロード (Downloads)」という名前のフォルダに保存されている。
@@ -54,6 +54,6 @@ RStudio では、上部のメニューから \[File\] -\> \[New File\] -\> \[Qua
 
 このウェブ資料も、.qmd ファイルから作られているが .qmd ファイルの書き方を .qmd ファイル内で説明すると混乱するので、以降の説明は [quarto-basics.html](https://yukiyanai.github.io/jp/classes/stat1/docs/quarto-basics.html) に記載する。
 
-Quarto文書 (.qmdファイル）の書き方を説明する上のページ（.html ファイル）の元となった.qmdファイルは [quarto-basics.qmd](https://drive.google.com/file/d/11TuNnK8KS9GAyucQl2hCcKbMUXXKv9EP/view?usp=share_link) である。また、同じファイルをPDFに変換すると、[quarto-basics.pdf](https://drive.google.com/file/d/11UixGKxAFbFOfmElXfLVVaLaldmx8bM7/view?usp=share_link) ができる。元の`.qmd` ファイルと、それを元に作られた `.pdf` ファイル、`.html` ファイルの3つをよく比べてみよう。
+Quarto文書 (.qmdファイル）の書き方を説明する上のページ（.html ファイル）の元となった.qmdファイルは [quarto-basics.qmd](https://drive.google.com/file/d/11TuNnK8KS9GAyucQl2hCcKbMUXXKv9EP/view?usp=drive_link) である。また、同じファイルをPDFに変換すると、[quarto-basics.pdf](https://drive.google.com/file/d/11UixGKxAFbFOfmElXfLVVaLaldmx8bM7/view?usp=share_link) ができる。元の`.qmd` ファイルと、それを元に作られた `.pdf` ファイル、`.html` ファイルの3つをよく比べてみよう。
 
-この授業の課題の作成には、Quarto文書の利用が必須である。 そこで、今後の授業で使えるテンプレートを配布する。 [stat1_template2024.qmd](https://drive.google.com/file/d/10979nW0WGN_Wpv6KPaT8Dyf0hnluUHzH/view?usp=drive_link) をダウンロードし、YAML ヘッダやグローバルチャンクオプションをそのまま利用してほしい。
+この授業の課題の作成には、Quarto文書の利用が必須である。 そこで、今後の授業で使えるテンプレートを配布する。 [stat1_template2024.qmd](https://drive.google.com/file/d/10NKIeL3kvUXJgrj9b4eNy8ltsr4krX5t/view?usp=drive_link) をダウンロードし、YAML ヘッダやグローバルチャンクオプションをそのまま利用してほしい。
