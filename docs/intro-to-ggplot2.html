@@ -500,9 +500,9 @@ $ y &lt;int&gt; 100, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85,
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 3
-$ v1 &lt;dbl&gt; -0.79418216, 0.06491534, 5.60915184, 9.82041020, -3.25366367, 6.192…
-$ v2 &lt;dbl&gt; 0.28109454, -5.20475923, -7.34814326, -0.64354823, 6.18839817, -10.…
-$ v3 &lt;dbl&gt; -0.4656054, -0.6198187, -0.4829328, 1.2257612, 0.3932428, -0.111598…</code></pre>
+$ v1 &lt;dbl&gt; 7.5345191, -4.4235848, 2.9481217, -0.9344770, 2.4766978, 7.0677996,…
+$ v2 &lt;dbl&gt; -3.75155205, -11.45920937, -8.43194194, 1.38551082, -0.02190734, 1.…
+$ v3 &lt;dbl&gt; 0.251607492, -1.288534481, 1.179976658, 0.268989769, -0.535512311, …</code></pre>
 </div>
 </div>
 <p><code>v1</code>, <code>v2</code>, <code>v3</code> という3つの変数があり、それぞれが <code>\&lt;dbl\&gt;</code> すなわち実数型であることがわかる。このデータフレームは100行3列である。</p>
@@ -602,8 +602,9 @@ Tip
 <span><span class="co">#my_font &lt;- "HiraginoSans-W3" # macOS</span></span>
 <span><span class="co">## Unix/Linux ではIPAexフォントのインストールが必要かも）</span></span>
 <span><span class="co">#my_font &lt;- "IPAexGothic" # Linux</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fontregisterer</span><span class="op">)</span></span>
-<span><span class="va">my_font</span> <span class="op">&lt;-</span> <span class="st">"Yu Gothic"</span></span>
+<span><span class="co">#library(fontregisterer) # fontregisterer がインストールされている場合</span></span>
+<span><span class="co"># my_font &lt;- "Yu Gothic" # fontregisterer がインストールされている場合</span></span>
+<span><span class="va">my_font</span> <span class="op">&lt;-</span> <span class="st">"Japan1"</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_gray</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">9</span>,</span>
 <span>                     base_family <span class="op">=</span> <span class="va">my_font</span><span class="op">)</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

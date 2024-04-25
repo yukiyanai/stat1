@@ -239,8 +239,9 @@ library(tidyverse)
 #my_font <- "HiraginoSans-W3" # macOS
 ## Unix/Linux ではIPAexフォントのインストールが必要かも）
 #my_font <- "IPAexGothic" # Linux
-library(fontregisterer)
-my_font <- "Yu Gothic"
+#library(fontregisterer) # fontregisterer がインストールされている場合
+# my_font <- "Yu Gothic" # fontregisterer がインストールされている場合
+my_font <- "Japan1"
 theme_set(theme_gray(base_size = 9,
                      base_family = my_font))
 ```

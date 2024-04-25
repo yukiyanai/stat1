@@ -43,9 +43,8 @@ library(tidyverse)
 Windows ユーザ（大学PCを含む）は、
 ```{r}
 #| eval: false
-library(fontregisterer)
 theme_set(theme_gray(base_size = 9,
-                     base_family = "Yu Gothic"))
+                     base_family = "Japan1"))
 ```
 を実行する。
 
@@ -66,30 +65,6 @@ theme_set(theme_gray(base_size = 9,
 ```
 を実行する。
 
-
-:::callout-note
-利用可能なフォントは、`library(fontregisterer)` を実行した後（Linuxでは実行しなくて良い）に、自分のOSにあわせて以下のいずれかを実行することで確認できる。
-
-```{r}
-#| eval: false
-# Linux
-systemfonts::system_fonts()$family
-```
-
-```{r}
-#| eval: false
-# macOS
-library(fontregisterer)
-names(quartzFonts())
-```
-
-```{r}
-#| eval: false
-# Windows
-library(fontregisterer)
-names(windowsFonts())
-```
-:::
 
 
 ### データセットの読み込み {#sec-datasets}
@@ -277,7 +252,7 @@ quantile(myd$height, prob = c(0, 0.25, 0.5, 0.75, 1))
 fivenum(myd$height)
 ```
 
-（一部の結果が四捨五入されていることを除けば）同じ結果が得られた。
+（ほぼ）同じ結果が得られた。
 
 **課題**
 
