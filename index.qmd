@@ -32,7 +32,7 @@
 
 ### 副読本 {#sec-rn4e}
 
-- 宋財泫, 矢内勇生 （執筆中）『[私たちのR：ベストプラクティスの探求](http://www.jaysong.net/RBook/)』(web book、無料) 
+- 宋財泫, 矢内勇生 （執筆中）『[私たちのR：ベストプラクティスの探求](https://www.jaysong.net/RBook/)』(web book、無料) 
 
 
 ## 講義トピックとウェブ資料の対応 {#sec-topics}

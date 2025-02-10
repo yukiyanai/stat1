@@ -22,7 +22,7 @@ ggplot2 で図を作るためには、**データフレーム (data frame)** と
 CSV形式で保存されたデータセットをもっているなら、`readr::read_csv()` や `read.csv()` などでそのデータを読み込めば、データフレームができる。
 
 ::: callout-note
-**readr** パッケージも tidyverse に含まれているので、tidyverse を読み込み済みならあらためて `library(readr)` を実行する必要はない。 このように、tidyverse はデータ分析でよく使うツールをまとめて提供しており、便利である。 詳しくは、『私たちのR』「[データハンドリング](http://www.jaysong.net/RBook/datahandling1.html)」 を参照されたい。
+**readr** パッケージも tidyverse に含まれているので、tidyverse を読み込み済みならあらためて `library(readr)` を実行する必要はない。 このように、tidyverse はデータ分析でよく使うツールをまとめて提供しており、便利である。 詳しくは、『私たちのR』「[データハンドリング](https://www.jaysong.net/RBook/datahandling1.html)」 を参照されたい。
 :::
 
 例として、前にも使った [fake_data_01.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) を読み込んでみよう。プロジェクト内の data ディレクトリ（フォルダ）に `fake_data_01.csv` があることを想定している。
