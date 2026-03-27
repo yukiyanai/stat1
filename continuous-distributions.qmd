@@ -11,12 +11,12 @@
 library(tidyverse)
 ```
 
-Windows ユーザ（大学PCを含む）は、
+Windows ユーザは、
 ```{r}
 #| eval: false
 #library(fontregisterer)
 theme_set(theme_gray(base_size = 9,
-                     base_family = "Japan1"))
+                     base_family = "Yu Gothic"))
 ```
 を実行する。
 
@@ -82,6 +82,11 @@ D_f <- D |>
   filter(gender == "female")
 #D_f <- filter(D, gender == "female") # パイプを使わない方法
 ```
+
+::: callout-tip
+`|>` はパイプ演算子 (pipe operator)と呼ばれるもので、cmd + shift + m (macOS) または ctrl + shift + m で入力する。 
+:::
+
 
 女性のみを取り出した `D_f`というデータフレームの`gender`を確認してみよう。
 ```{r}

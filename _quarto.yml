@@ -12,7 +12,7 @@ book:
     background: light
   page-navigation: true
   page-footer: 
-    center: "Copyright 2023−2024, Yuki Yanai"
+    center: "Copyright 2023−2026, Yuki Yanai"
     background: light
     border: false
   search: true

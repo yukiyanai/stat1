@@ -15,12 +15,11 @@
 library(tidyverse)
 ```
 
-Windows ユーザ（大学PCを含む）は、
+Windows ユーザは、
 ```{r}
 #| eval: false
-#library(fontregisterer)
 theme_set(theme_gray(base_size = 9,
-                     base_family = "Japan1"))
+                     base_family = "Yu Gothic"))
 ```
 を実行する。
 

@@ -139,7 +139,7 @@ is.data.frame(df1)
 glimpse(df1)
 ```
 
-`x` と `y` という変数があり、それぞれが `\<int\>` すなわち整数 (integer) 型であることがわかる。また、データは100行2列である。
+`x` と `y` という変数があり、それぞれが `<int>` すなわち整数 (integer) 型であることがわかる。また、データは100行2列である。
 
 次に、`v1`, `v2`, `v3` という3つの変数をもつ `df2` を `tibble()` で作る。`rnorm(n, mean, sd)` で、平均が`mean`、標準偏差が`sd` の正規分布から `n` 個の乱数を生成することができる（詳しくは、後半のトピックで説明する）。
 
@@ -156,15 +156,15 @@ is.data.frame(df2)
 glimpse(df2)
 ```
 
-`v1`, `v2`, `v3` という3つの変数があり、それぞれが `\<dbl\>` すなわち実数型であることがわかる。このデータフレームは100行3列である。
+`v1`, `v2`, `v3` という3つの変数があり、それぞれが `<dbl>` すなわち実数型であることがわかる。このデータフレームは100行3列である。
 
 ::: callout-note
-`\<dbl\>` というのは、double precision floating point number type（倍精度浮動小数点数型）のことである。この授業で必要な範囲では、実数 (real number) であると考えて差し支えない。この他に授業で出てくる変数の型は、
+`<dbl>` というのは、double precision floating point number type（倍精度浮動小数点数型）のことである。この授業で必要な範囲では、実数 (real number) であると考えて差し支えない。この他に授業で出てくる変数の型は、
 
--   `\<int\>`: integer（整数型）
--   `\<lgl\>`: logical（論理型）
--   `\<chr\>`: character（文字列型）
--   `\<fct\>`: factor（因子型）
+-   `<int>`: integer（整数型）
+-   `<lgl>`: logical（論理型）
+-   `<chr>`: character（文字列型）
+-   `<fct>`: factor（因子型）
 
 それぞれ登場したときに必要な範囲で説明するが、詳しくは「プログラミング」の授業で勉強してほしい。
 :::
@@ -236,12 +236,10 @@ library(tidyverse)
 #| eval: false
 ## 図のなかで日本語を使えるようにする
 ## フォントの設定はお好みで
+my_font <- "Yu Gothic" # Windows
 #my_font <- "HiraginoSans-W3" # macOS
 ## Unix/Linux ではIPAexフォントのインストールが必要かも）
 #my_font <- "IPAexGothic" # Linux
-#library(fontregisterer) # fontregisterer がインストールされている場合
-# my_font <- "Yu Gothic" # fontregisterer がインストールされている場合
-my_font <- "Japan1"
 theme_set(theme_gray(base_size = 9,
                      base_family = my_font))
 ```
@@ -532,7 +530,7 @@ dir.create("figs")
     -   `Ctrl` + `Shift` + `Enter` （どのOSでも）
 -   チャンク右上の実行ボタン (Run Current Chunk) をクリックする
 
-PDF形式の図を保存するには、`cairo_pdf()` という関数を使うのが便利である。 先ほど作ったヒストグラム `p2_6` を、PDFファイルに保存しよう。 ファイル名は、`hist_eg1.pdf` にしよう。図の大きさは、A4用紙の半ページよりやや小さくなるように、幅 (width) を5インチ (127.0mm)、高さ (height) を4インチ (101.6mm) にする。軸ラベルに日本語を使っているので、日本語を表示できるフォントを指定する必要があるが、上で `library(tidyverse)` を実行した直後に **fontregregisterer** パッケージを利用して `theme_set()` で指定したフォント（Linux は IPAexゴシック、macOS は ヒラギノ角ゴシック、Windows は游ゴシック）が使われる。 第1ステップの内容をまとめると、次のようになる（**第1ステップだけで実行しない!!!**）。
+PDF形式の図を保存するには、`cairo_pdf()` という関数を使うのが便利である。 先ほど作ったヒストグラム `p2_6` を、PDFファイルに保存しよう。 ファイル名は、`hist_eg1.pdf` にしよう。図の大きさは、A4用紙の半ページよりやや小さくなるように、幅 (width) を5インチ (127.0mm)、高さ (height) を4インチ (101.6mm) にする。軸ラベルに日本語を使っているので、日本語を表示できるフォントを指定する必要があるが、上で  `theme_set()` で指定したフォント（Linux は IPAexゴシック、macOS は ヒラギノ角ゴシック、Windows は游ゴシック）が使われる。 第1ステップの内容をまとめると、次のようになる（**第1ステップだけで実行しない!!!**）。
 
 ```{r}
 #| eval: false

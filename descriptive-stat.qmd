@@ -9,26 +9,21 @@
 
 ### パッケージの読み込み {#sec-pacs}
 
-まず、この授業で頻繁に（ほぼ毎回）使う、**tidyverse**パッケージを使ってみよう。
-
-::: callout-important
-この説明は、大学の情報演習室を使うことを想定して書いている。
-自分のパソコンを使っている場合は、まず以下の作業が必要である。**この作業を大学の情報演習室で行ってはいけない**（すべてのパッケージがインストール済みである）。
+まず、この授業で使うRパッケージをインストールしよう。インストールは（Rのバージョンアップをしない限り）1度だけ行えばよいので、以下のコードを Console にコピペして実行しよう（安定したインターネット接続が必要）。
 
 ```{r}
 #| eval: false
 pkgs <- c("tidyverse", 
-          "sytemfonts",
           "shiny",
           "miniUI",
           "DT",
           "patchwork",
           "remotes")
 install.packages(pkgs)
-remotes::install_github("Gedevan-Aleksizde/fontregisterer", 
-                        upgrade = "never")
 ```
-:::
+
+
+次に、この授業で頻繁に（ほぼ毎回）使う、**tidyverse**パッケージを使ってみよう。
 
 パッケージの読み込みには、`library()` を使う。パッケージの読み込みは、R (RStudio) を起動するたびに行う必要がある。つまり、`library()` はそのパッケージを使う場合には毎回実行する必要がある。また、複数の qmd で同じパッケージを使う場合には、それぞれの qmdファイルに`library()` でパッケージを読み込む命令を書いておく必要がある（qmd ファイルについては [5章](intro-to-quarto.html) で説明する）。
 
@@ -38,13 +33,12 @@ library(tidyverse)
 ```
 
 図中の日本語が文字化けすることがあるので、OSに合わせてフォントを指定する以下のコードを実行する。
-**大学のパソコンはWindowsなので、Windows用のコードのみ実行する**。
 
-Windows ユーザ（大学PCを含む）は、
+Windows ユーザは、
 ```{r}
 #| eval: false
 theme_set(theme_gray(base_size = 9,
-                     base_family = "Japan1"))
+                     base_family = "Yu Gothic"))
 ```
 を実行する。
 
@@ -77,7 +71,7 @@ dir.create("data")
 ```
 
 次にデータセット [fake_data_01.csv](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) をダウンロードし、今作った data フォルダの中に保存する。ファイル (`fake_data_01.csv`) を[ここ](https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv) から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。
-大学のパソコンでは、ダウンロードしたファイルが「ダウンロード」フォルダに保存されているので、エクスプローラーを開き、対象ファイルを「ダウンロード」からプロジェクト内の「data」フォルダに移動する。
+通常、ダウンロードしたファイルは「ダウンロード」フォルダに保存されているので、エクスプローラー（macの場合はFinder）を開き、対象ファイルを「ダウンロード」からプロジェクト内の「data」フォルダに移動する。
 
 :::callout-note
 以下のコードによって、Rでデータファイルをダウンロードすることもできる。
@@ -87,7 +81,7 @@ download.file(
   url = "https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv",
   destfile = "data/fake_data_01.csv")
 ```
-しかし、この方法は大学のパソコンではうまくいなかいので、授業では上に書かれた方法で手動でダウンロードするように。
+しかし、この方法はWindowsではうまくいなかいことがあるので、授業では上に書かれた方法で手動でダウンロードしたほうが確実である。
 :::
 
 
@@ -130,7 +124,7 @@ names(myd)
 dim(myd)
 ```
 
-とする。最初の数字が$n$の数（データセットの行数）、2番目の数字が変数の数（列数）である（RStudio を使うと、右上のウィンドウの"Environment" というタブにこの情報が既に表示されているので、そこで確認してもよい）。
+とする。最初の数字が$n$の数（データセットの行数）、2番目の数字が変数の数（列数）である（RStudio を使うと、右下のペインの"Environment" というタブにこの情報が既に表示されているので、そこで確認してもよい）。
 
 また、データセットの確認には、`glimpse()` も便利である。
 
