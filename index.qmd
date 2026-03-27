@@ -21,6 +21,10 @@
     -   登録キーはポータルで通知する
 -   [授業用のSlackグループ](https://kut-stat-2026.slack.com)
     -   [登録](https://join.slack.com/t/kut-stat-2026/signup) には大学ドメイン のメールアドレスが必要
+- Rのインストール方法
+  - [macOS用](https://yukiyanai.github.io/jp/resources/docs/install-R_macOS_2026.pdf) (PDF, 6.6MB)
+  - [Windows用](https://yukiyanai.github.io/jp/resources/docs/install-R_windows_2026.pdf) (PDF, 11.4MB)
+  
 
 ## 教科書・副読本 {#sec-refs}
 
