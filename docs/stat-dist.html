@@ -333,7 +333,7 @@ X \sim \mbox{Bernoulli}(\theta)
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x_1</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.71</code></pre>
+<pre><code>[1] 0.7</code></pre>
 </div>
 </div>
 <p>期待値である0.7に一致はしていないものの、ある程度近い値をとっている。</p>
@@ -341,7 +341,7 @@ X \sim \mbox{Bernoulli}(\theta)
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">x_1</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2061061</code></pre>
+<pre><code>[1] 0.2102102</code></pre>
 </div>
 </div>
 <p>それなりに近い値が得られていることがわかる。</p>
@@ -377,7 +377,7 @@ X \sim \mbox{Binomial}(n, \theta)
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x_2</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.509</code></pre>
+<pre><code>[1] 3.511</code></pre>
 </div>
 </div>
 <p>期待値である<span class="math inline">\(n\theta = 5\cdot 0.7=0.35\)</span>に一致はしていないものの、ある程度近い値をとっている。</p>
@@ -385,7 +385,7 @@ X \sim \mbox{Binomial}(n, \theta)
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">x_2</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.028948</code></pre>
+<pre><code>[1] 1.042922</code></pre>
 </div>
 </div>
 <p>それなりに近い値が得られているが、ややズレいている。</p>
@@ -442,7 +442,7 @@ X \sim \mbox{Normal}(\mu, \sigma)
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x_3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.094786</code></pre>
+<pre><code>[1] 4.828358</code></pre>
 </div>
 </div>
 <p>期待値である5に一致はしないが、近い値をとっている。</p>
@@ -450,7 +450,7 @@ X \sim \mbox{Normal}(\mu, \sigma)
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x_3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.011296</code></pre>
+<pre><code>[1] 3.026114</code></pre>
 </div>
 </div>
 <p>分布の標準偏差である3にほぼ一致する値が得られた。</p>
@@ -458,10 +458,10 @@ X \sim \mbox{Normal}(\mu, \sigma)
 <div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x_3</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">-</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="va">x_3</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 695</code></pre>
+<pre><code>[1] 699</code></pre>
 </div>
 </div>
-<p>である。1000個中695個の値が「平均 ± 1標準偏差」の範囲にある、つまり、データの約69.5 %が「平均 ± 1標準偏差」に収まっている。理論的には、この範囲に収まる確率は</p>
+<p>である。1000個中699個の値が「平均 ± 1標準偏差」の範囲にある、つまり、データの約69.9 %が「平均 ± 1標準偏差」に収まっている。理論的には、この範囲に収まる確率は</p>
 <div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">+</span> <span class="fl">3</span>, mean <span class="op">=</span> <span class="fl">5</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">-</span> <span class="fl">3</span>, mean <span class="op">=</span> <span class="fl">5</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -473,10 +473,10 @@ X \sim \mbox{Normal}(\mu, \sigma)
 <div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x_3</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="va">x_3</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 949</code></pre>
+<pre><code>[1] 951</code></pre>
 </div>
 </div>
-<p>である。1000個中949個の値が「平均 ± 2標準偏差」の範囲にある、つまり、データの約94.9 %が「平均 ± 2標準偏差」に収まっている。理論的には、この範囲に収まる確率は</p>
+<p>である。1000個中951個の値が「平均 ± 2標準偏差」の範囲にある、つまり、データの約95.1 %が「平均 ± 2標準偏差」に収まっている。理論的には、この範囲に収まる確率は</p>
 <div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">3</span>, mean <span class="op">=</span> <span class="fl">5</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">3</span>, mean <span class="op">=</span> <span class="fl">5</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -534,7 +534,7 @@ X \sim \mbox{Normal}(0, 1)
 <div class="cell">
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x_4</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.06339472</code></pre>
+<pre><code>[1] 0.01400403</code></pre>
 </div>
 </div>
 <p>期待値である0に一致はしないが、近い値をとっている。</p>
@@ -542,7 +542,7 @@ X \sim \mbox{Normal}(0, 1)
 <div class="cell">
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x_4</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.019742</code></pre>
+<pre><code>[1] 0.9930937</code></pre>
 </div>
 </div>
 <p>分布の標準偏差である1にほぼ一致する値が得られた。</p>
@@ -550,10 +550,10 @@ X \sim \mbox{Normal}(0, 1)
 <div class="cell">
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x_4</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">1</span> <span class="op">&amp;</span> <span class="va">x_4</span> <span class="op">&lt;</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 665</code></pre>
+<pre><code>[1] 683</code></pre>
 </div>
 </div>
-<p>である。1000個中665個の値が<span class="math inline">\(-1 &lt; X &lt; 1\)</span>の範囲にある、つまり、データの約66.5 %が<span class="math inline">\(-1 &lt; X &lt; 1\)</span>に収まっている。理論的には、この範囲に収まる確率は</p>
+<p>である。1000個中683個の値が<span class="math inline">\(-1 &lt; X &lt; 1\)</span>の範囲にある、つまり、データの約68.3 %が<span class="math inline">\(-1 &lt; X &lt; 1\)</span>に収まっている。理論的には、この範囲に収まる確率は</p>
 <div class="cell">
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -565,10 +565,10 @@ X \sim \mbox{Normal}(0, 1)
 <div class="cell">
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x_4</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">2</span> <span class="op">&amp;</span> <span class="va">x_4</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 948</code></pre>
+<pre><code>[1] 958</code></pre>
 </div>
 </div>
-<p>である。1000個中948個の値が<span class="math inline">\(-2 &lt; X &lt; 2\)</span>の範囲にある、つまり、データの約94.8 %が<span class="math inline">\(-2 &lt; X &lt; 2\)</span>に収まっている。理論的には、この範囲に収まる確率は</p>
+<p>である。1000個中958個の値が<span class="math inline">\(-2 &lt; X &lt; 2\)</span>の範囲にある、つまり、データの約95.8 %が<span class="math inline">\(-2 &lt; X &lt; 2\)</span>に収まっている。理論的には、この範囲に収まる確率は</p>
 <div class="cell">
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
