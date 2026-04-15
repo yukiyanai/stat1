@@ -14,7 +14,6 @@ library(tidyverse)
 Windows ユーザは、
 ```{r}
 #| eval: false
-#library(fontregisterer)
 theme_set(theme_gray(base_size = 9,
                      base_family = "Yu Gothic"))
 ```
@@ -130,9 +129,9 @@ plot(hist_2a)
 次のようにする。
 ```{r}
 ecdf_1 <- ggplot(D_f, aes(x = height)) +
-  stat_ecdf() +
   geom_hline(yintercept = c(0, 1), 
              color = "gray") +
+  stat_ecdf() +
   labs(x = "身長 (cm)", y = "割合")
 plot(ecdf_1)
 ```
@@ -191,7 +190,7 @@ $$
 :::
 
 :::callout-note
-平均が$\mu$で標準偏差が$\sigma$正規 (normal) 分布$\mbox{Normal}(\mu, \sigma)$ をQuarto文書で書くためには、以下の内容を文として、つまり、**コードチャンクの外に**書いて render すればよい。
+平均が$\mu$で標準偏差が$\sigma$の正規 (normal) 分布$\mbox{Normal}(\mu, \sigma)$ をQuarto文書で書くためには、以下の内容を文として、つまり、**コードチャンクの外に**書いて render すればよい。
 ```
 $\mbox{Normal}(\mu, \sigma)$
 ```

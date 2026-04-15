@@ -217,25 +217,28 @@ with(D, table(res, res2))
 この新しい変数を使って、もう1度度数分布を図にしてみよう。今度は、`geom_bar()` の代わりに`geom_histogram()` を使う。
 
 ```{r}
-bar_coin2 <- ggplot(D, aes(x = res2)) +
-  geom_histogram(color = "black", binwidth = 0.5) +
+hist_coin1 <- ggplot(D, aes(x = res2)) +
+  geom_histogram(color = "black", bins = 2) +
   labs(x = "結果", y = "回数") +
   scale_x_continuous(breaks = 0 : 1,
                      minor_breaks = NULL)
-plot(bar_coin2)
+plot(hist_coin1)
 ```
 
+取りうる値が0と1の2つしかないので、`bins = 2` でビン（ヒストグラムの棒）の数を2に制限している。
+
+縦軸を確率密度に変えたいときは次のようにする。
 
 ```{r}
-hist_coin <- ggplot(D, aes(x = res2, y = after_stat(density))) +
+hist_coin2 <- ggplot(D, aes(x = res2, y = after_stat(density))) +
   geom_histogram(color = "black", bins = 2) +
   labs(x = "結果", y = "割合") +
   scale_x_continuous(breaks = 0 : 1,
                      minor_breaks = NULL)
-plot(hist_coin)
+plot(hist_coin2)
 ```
 
-取りうる値が0と1の2つしかないので、`bins = 2` でビン（ヒストグラムの棒）の数を2に制限している。
+
 
 
 ### サイコロ投げ {#sec-rolladie}
