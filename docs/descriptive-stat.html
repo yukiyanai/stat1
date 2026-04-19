@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.542">
+<meta name="generator" content="quarto-1.6.40">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>KUT 統計学1 - 4&nbsp; 記述統計</title>
+<title>4&nbsp; 記述統計 – KUT 統計学1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,10 +67,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-4cf0b346808cf8b54da9051ae5af4cb2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -96,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -127,13 +127,13 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./descriptive-stat.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">記述統計</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -145,17 +145,17 @@ window.Quarto = {
         <div class="sidebar-tools-main">
     <a href="https://github.com/yukiyanai/stat1/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
@@ -279,13 +279,13 @@ window.Quarto = {
 </header><p><strong>今回の目標</strong></p>
 <ul>
 <li>Rで基本的な統計量を求めてみよう！</li>
-<li>Rで作図する例を見てみよう！（今回は、作図コードの内容を理解しなくても良い）</li>
+<li>Rで作図する例を見てみよう！（今回は作図コードの内容を理解しなくてもよい）</li>
 </ul>
 <section id="sec-1var" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="sec-1var">
 <span class="header-section-number">4.1</span> 1変数の記述統計とデータの可視化</h2>
 <section id="sec-pacs" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="sec-pacs">
 <span class="header-section-number">4.1.1</span> パッケージの読み込み</h3>
-<p>まず、この授業で使うRパッケージをインストールしよう。インストールは（Rのバージョンアップをしない限り）1度だけ行えばよいので、以下のコードを Console にコピペして実行しよう（安定したインターネット接続が必要）。</p>
+<p>まず、この授業で使うRパッケージをインストールしよう（既に実行済みならここは飛ばしてよい）。インストールは（Rのバージョンアップをしない限り）1度だけ行えばよいので、以下のコードを Console にコピペして実行しよう（安定したインターネット接続が必要）。</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tidyverse"</span>, </span>
 <span>          <span class="st">"shiny"</span>,</span>
@@ -296,7 +296,7 @@ window.Quarto = {
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>次に、この授業で頻繁に（ほぼ毎回）使う、<strong>tidyverse</strong>パッケージを使ってみよう。</p>
-<p>パッケージの読み込みには、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> を使う。パッケージの読み込みは、R (RStudio) を起動するたびに行う必要がある。つまり、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> はそのパッケージを使う場合には毎回実行する必要がある。また、複数の qmd で同じパッケージを使う場合には、それぞれの qmdファイルに<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> でパッケージを読み込む命令を書いておく必要がある（qmd ファイルについては <a href="intro-to-quarto.html">5章</a> で説明する）。</p>
+<p>パッケージの読み込みには、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> を使う。パッケージの読み込みは、R (RStudio) を起動するたびに行う必要がある。つまり、パッケージを使う場合には以下のコードを毎回実行する必要がある。また、複数の Rスクリプトやqmdファイルで で同じパッケージを使う場合には、それぞれの Rスクリプト/qmdファイルに<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> でパッケージを読み込む命令を書いておく必要がある（qmd ファイルについてはこの資料の <a href="intro-to-quarto.html">5章</a> で説明する）。</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -319,13 +319,14 @@ window.Quarto = {
 <span>                     base_family <span class="op">=</span> <span class="st">"HiraginoSans-W3"</span><span class="op">)</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>を実行する。</p>
+<p>Windows (macOS) ユーザでも、IPAexフォントを使いたい場合は、<a href="https://moji.or.jp/ipafont/">IPAexフォント</a> をインストールすれば使える。</p>
 </section><section id="sec-datasets" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="sec-datasets">
 <span class="header-section-number">4.1.2</span> データセットの読み込み</h3>
 <p>今回の実習で利用するデータをダウンロードしよう。 準備として、現在利用しているプロジェクト（上で作ったフォルダ）の中に、<strong>data</strong> という名前のフォルダを作ろう。</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>次にデータセット <a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">fake_data_01.csv</a> をダウンロードし、今作った data フォルダの中に保存する。ファイル (<code>fake_data_01.csv</code>) を<a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">ここ</a> から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。 ダウンロード方法はOSやウェブブラウザによって異なる。 リンクをクリックするだけでダウンロードできる場合もあるが、リンクを右クリックして「名前を付けてリンクを保存」を選択する必要があるかもしれない。名前をつけて保存する場合には、ファイル名が正しいことを確認すること。特に、ファイル名拡張子が正しいかどうか必ず確認されたい。拡張子が正しくない場合には、「ファイルの種類」を「すべてのファイル」に変更してから拡張子を正しいものに書き換えて保存する（これは Windows の場合）。</p>
+<p>次にデータセット <a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">fake_data_01.csv</a> をダウンロードし、今作った data フォルダの中に保存する。ファイル (<code>fake_data_01.csv</code>) を<a href="https://yukiyanai.github.io/jp/classes/stat1/data/fake_data_01.csv">ここ</a> から手動でダウンロードして、プロジェクト内の data ディレクトリに移動する。 ダウンロード方法はOSやウェブブラウザによって異なる。 リンクをクリックするだけでダウンロードできる場合もあるが、リンクを右クリックして「名前を付けてリンクを保存」を選択する必要があるかもしれない。名前をつけて保存する場合にはファイル名が正しいことを確認すること。特に、ファイル名拡張子が正しいかどうか必ず確認されたい。拡張子が正しくない場合には、「ファイルの種類」を「すべてのファイル」に変更してから拡張子を正しいものに書き換えて保存する（これは Windows の場合）。</p>
 <p>通常、ダウンロードしたファイルは「ダウンロード」フォルダに保存されているので、エクスプローラー（macの場合はFinder）を開き、対象ファイルを「ダウンロード」からプロジェクト内の <code>data</code>フォルダに移動する（ダウンロードを実行する前に、ダウンロード先としてプロジェクト内の <code>data</code>を選んでもよい）。</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -453,7 +454,7 @@ Note
 </div>
 </div>
 <p>私たちが利用しているデータセット <code>myd</code> に含まれる <code>height</code>（身長）という変数 (variable) の平均値（算術平均; mean）を求めよう。Rでは、<code>mean(変数名)</code>とすると、平均値が求められる。</p>
-<p>ただし、<code>height</code> という変数は <code>myd</code> というデータの一部（1つの変数, 1つの列）なので、それをRに伝える必要がある。データセットの中身の変数を使うときは、$ マークを使って、<code>データセット名$変数名</code>とすればよい。よって、height の平均値は</p>
+<p>ただし、<code>height</code> という変数は <code>myd</code> というデータの一部（1つの変数, 1つの列）なので、それをRに伝える必要がある。データセットの中身の変数を使うときは、<code>$</code> マークを使って、<code>データセット名$変数名</code>とすればよい。よって、<code>height</code> の平均値は</p>
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">myd</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -570,7 +571,7 @@ Note
 </ul></section><section id="sec-viz1" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="sec-viz1">
 <span class="header-section-number">4.1.4</span> 変数の可視化</h3>
 <p>変数の特徴は統計量によってある程度把握することができるが、統計量だけではわかりにくい特徴もある。そこで、データ分析を行う際には、図を作って自分が持っているデータを可視化するという作業が必要かつ重要である。</p>
-<p>今日は、<strong>ggplot2</strong>パッケージを使って、簡単な図をいくつか作ってみよう。<strong>ggplot2</strong>は先ほど読み込んだ <strong>tidyverse</strong> の一部なので、新たに読み込む必要はない。また、<strong>ggplot2</strong>の詳しい使い方は<a href="intro-to-ggplot2.html">6章</a>」で解説する。 ここではコードの中身まで理解しなくてもよい。</p>
+<p>今日は、<strong>ggplot2</strong>パッケージを使って、簡単な図をいくつか作ってみよう。<strong>ggplot2</strong>は先ほど読み込んだ <strong>tidyverse</strong> の一部なので、新たに読み込む必要はない。また、<strong>ggplot2</strong>の詳しい使い方はこの資料の<a href="intro-to-ggplot2.html">6章</a>で解説する。 ここではコードの中身まで理解しなくてもよい。</p>
 <p>まず、最も基本的かつよく使う図であるヒストグラム　(histogram) を作ってみよう。 ggplot2では <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> でヒストグラムを作ることができる。</p>
 <p>例として、身長のヒストグラムを描いてみよう。</p>
 <div class="cell">
@@ -653,7 +654,7 @@ Note
 <span class="header-section-number">4.2</span> 2変数の記述統計とデータの可視化</h2>
 <section id="sec-bivarviz" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="sec-bivarviz">
 <span class="header-section-number">4.2.1</span> 2つの量的変数の関係を図示する</h3>
-<p>2つの量的変数の関係は、散布図 (scatter plot) で確認する。ここでは、身長 (height) と体重 (weight) の関係を図示してみよう。ggplot2では、<code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> で散布図ができる。</p>
+<p>2つの量的変数の関係は散布図 (scatter plot) で確認する。ここでは、身長 (height) と体重 (weight) の関係を図示してみよう。ggplot2では、<code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> で散布図ができる。</p>
 <div class="cell">
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">myd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -669,8 +670,8 @@ Note
 <p>このデータセットに含まれる身長と体重の間には、どのような関係があるだろうか？</p>
 </section><section id="sec-bivarstat" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="sec-bivarstat">
 <span class="header-section-number">4.2.2</span> 2つの量的変数の関係を統計量で示す</h3>
-<p>2つの量的変数の関係を表すのにもっともよく使われるのは、相関係数 (correlation coefficient) である。この統計量は、<span class="math inline">\(r\)</span> で表されることが多い。<span class="math inline">\(-1 \leq r \leq 1\)</span>となる。<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span> という2つの変数があったとき、<span class="math inline">\(a\)</span>が大きくなるほど<span class="math inline">\(b\)</span> も大きくなるという関係があるとき、「<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span>には正の相関 (positive correlation) がある」と言い、このとき <span class="math inline">\(r &gt; 0\)</span> である。また、<span class="math inline">\(a\)</span>が大きくなるほど<span class="math inline">\(b\)</span> が小さくなるという関係があるとき、「<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span>には負の相関 (negative correlation) がある」と言い、このとき <span class="math inline">\(r &lt; 0\)</span> である。<span class="math inline">\(r = 0\)</span> のとき、「<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span>に相関関係はない」と言う。</p>
-<p>正の相関があるとき、<span class="math inline">\(r\)</span>が<span class="math inline">\(1\)</span>に近いほど、その関係は強い。また、負の相関があるとき、<span class="math inline">\(r\)</span>が<span class="math inline">\(-1\)</span>に近いほど、その関係は強い。つまり、相関関係は、相関係数の絶対値が1に近いほど強い。</p>
+<p>2つの量的変数の関係を表すのにもっともよく使われるのは、相関係数 (correlation coefficient) である。この統計量は、<span class="math inline">\(r\)</span> で表されることが多い。<span class="math inline">\(-1 \leq r \leq 1\)</span>となる。<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span> という2つの変数があったとき、<span class="math inline">\(a\)</span>が大きくなるほど<span class="math inline">\(b\)</span> も大きくなるという関係があるとき、「<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span>には正の相関 (positive correlation) がある」と言い、このとき <span class="math inline">\(r &gt; 0\)</span> である。また、<span class="math inline">\(a\)</span>が大きくなるほど<span class="math inline">\(b\)</span> が小さくなるという関係があるとき、「<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span>には負の相関 (negative correlation) がある」と言い、このとき <span class="math inline">\(r &lt; 0\)</span> である。<span class="math inline">\(r = 0\)</span> のとき、「<span class="math inline">\(a\)</span>と<span class="math inline">\(b\)</span>に相関はない」と言う。</p>
+<p>正の相関があるとき、<span class="math inline">\(r\)</span>が<span class="math inline">\(1\)</span>に近いほどその関係は強い。また、負の相関があるとき、<span class="math inline">\(r\)</span>が<span class="math inline">\(-1\)</span>に近いほどその関係は強い。つまり、相関関係は相関係数の絶対値が1に近いほど強い。</p>
 <p>Rで相関係数を求めるときは、<code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>を使う。身長と体重の相関係数は、</p>
 <div class="cell">
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">myd</span><span class="op">$</span><span class="va">height</span>, <span class="va">myd</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -682,7 +683,7 @@ Note
 </section><section id="sec-scatcor" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="sec-scatcor">
 <span class="header-section-number">4.2.3</span> 散布図と相関係数</h3>
 <p>2つの量的な変数の関係を調べるときは、散布図と相関係数の<strong>両者</strong>を使ったほうがよい。</p>
-<p>散布図だけを使うと、本当は存在しない関係を、誤って見つけてしまうことがある。例えば、本当は相関がない2つの変数の散布図を描いたとき、描かれた点がなんとなく右肩上がりの直線の周りに集まっているように見えてしまうことがある。これは、人間がパタンを見つける能力に優れている（優れ過ぎている？）からだと考えられる。偶然できた壁のシミが人間の顔に見えてしまうことがあるというのも似たような現象である。</p>
+<p>散布図だけを使うと、本当は存在しない関係を<strong>誤って</strong>「見つけて」しまうことがある。例えば、本当は相関がない2つの変数の散布図を描いたとき、描かれた点がなんとなく右肩上がりの直線の周りに集まっているように見えてしまうことがある。これは、人間がパタンを見つける能力に優れている（優れ過ぎている？）からだと考えられる。偶然できた壁のシミが人間の顔に見えてしまうことがあるというのも似たような現象である。</p>
 <p>散布図だけに頼ると、存在しないパタンが見えてしまうことがあるので、散布図で発見したパタンが本当にあるかどうか、相関係数を求めて確かめるべきである。</p>
 <p>反対に、相関係数だけに頼るのも危険である。相関係数は、2変数のあらゆる関係を捉えられるわけではない。相関係数が示すのは、2つの変数の<strong>直線的な関係だけ</strong>である。</p>
 <p>例として、<span class="math inline">\(x\)</span> と<span class="math inline">\(y\)</span> という2つの変数を以下のとおり作り、相関係数を計算してみよう。</p>
@@ -760,18 +761,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -803,7 +793,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/yukiyanai\.github\.io\/stat1\/");
@@ -811,10 +821,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -856,7 +871,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -904,7 +923,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1125,12 +1148,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./intro-to-RStudio.html" class="pagination-link  aria-label=" &lt;span="">
+      <a href="./intro-to-RStudio.html" class="pagination-link" aria-label="RStudio入門">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">RStudio入門</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro-to-quarto.html" class="pagination-link" aria-label="<span class='chapter-number'>5</span>&nbsp; <span class='chapter-title'>Quarto 入門</span>">
+      <a href="./intro-to-quarto.html" class="pagination-link" aria-label="Quarto 入門">
         <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto 入門</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
