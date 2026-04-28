@@ -213,7 +213,7 @@ plot(bar_coin)
 ```
 
 
-上で作った棒グラフの縦軸は回数である。これを分布として表現するために縦軸を割合 (proportion) に変更したい。そのために、`after_stat(prop)`をy軸の変数として指定して、以下のようにする。`group = 1` も必要なので注意されたい。
+上で作った棒グラフの縦軸は回数である。これを分布として表現するために縦軸を割合 (proportion) に変更したい。そのために、`after_stat(prop)`をy軸の変数として指定して、以下のようにする。
 
 ```{r}
 bar_coin_dist <- ggplot(D, aes(x = res, y = after_stat(prop), group = 1)) +
@@ -222,7 +222,8 @@ bar_coin_dist <- ggplot(D, aes(x = res, y = after_stat(prop), group = 1)) +
 plot(bar_coin_dist)
 ```
 
-`group = 1` も必要なので注意されたい。これを忘れると、各カテゴリ内での割合が計算され、すべての棒の高さが1になってしまう。
+`group = 1` も必要なので注意されたい。これを忘れると、各カテゴリ内での割合が計算され、すべての棒の高さが1になってしまう。`y = after_stat(prop)` も `group = 1`も`aes()`の内側に書く。
+
 
 縦軸をパーセント表記に変えたいときは**scales**パッケージの`scales::label_percent`が使える。
 次のようにする。
