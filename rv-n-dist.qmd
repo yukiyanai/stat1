@@ -166,7 +166,7 @@ qunif(1, min = 0, max = 12)
 ```{r}
 a3 <- sample(1 : 6, size = 100000, replace = TRUE)
 df3 <- tibble(a3)
-p3 <- ggplot(df3, aes(x = a3, y = after_stat(count) / nrow(df3))) +
+p3 <- ggplot(df3, aes(x = a3, y = after_stat(prop), group = 1)) +
   geom_bar(width = 0.5) +
   labs(x = "出た目", y = "確率") +
   scale_x_continuous(breaks = 1 : 6)
@@ -194,10 +194,11 @@ $$
 ```{r}
 #| echo: false
 bin_ex1 <- dbinom(0 : 5, size = 5, prob = 0.3)
-dd <- data.frame(x = 0 : 5, y = bin_ex1)
+dd <- tibble(x = 0 : 5, y = bin_ex1)
 p_bin1 <- ggplot(dd, aes(x, y)) +
-  geom_bar(stat = "identity") +
-  scale_x_continuous(breaks = 0:5) +
+  geom_bar(stat = "identity", width = 0.5) +
+  scale_x_continuous(breaks = 0 : 5,
+                     minor_break = FALSE) +
   labs(x = "成功回数", 
        y = "確率",
        title = "試行回数5で成功確率0.3の二項分布")
@@ -270,7 +271,7 @@ x <- rbinom(n = 1000, size = 10, prob = 0.3)
 この結果を棒グラフにしてみよう（離散型分布なので、縦軸に確率をとって棒グラフが描ける）。
 ```{r}
 D_bin <- tibble(x)
-h_binom <- ggplot(D_bin, aes(x = x, y = after_stat(count) / nrow(D_bin))) +
+h_binom <- ggplot(D_bin, aes(x = x, y = after_stat(prop), group = 1)) +
   geom_bar(width = 0.5) +
   scale_x_continuous(breaks = 0 : 10,
                      minor_breaks = NULL) +
@@ -340,7 +341,7 @@ qbinom(.999, size = 10, prob = 0.3)
 $$
 X \sim \mbox{Normal}(\mu, \sigma)
 $$
-と書く。
+と、書く。
 
 正規分布 (<u>norm</u>al distribution) からの乱数生成には、`rnorm()` を使う。この関数では、以下の3つの引数（ひきすう）を指定する。
 
@@ -410,7 +411,8 @@ plot(h_n3)
 ```{r}
 h_n3_b <- h_n3 +
   geom_vline(xintercept = mean(b3),
-             color = "violet")
+             color = "tomato",
+             linewidth = 2)
 plot(h_n3_b)
 ```
 

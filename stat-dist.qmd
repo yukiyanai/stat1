@@ -58,13 +58,13 @@ x_1 <- rbinom(1000, size = 1, prob = 0.7)
 得られた値の分布を棒グラフにして確認してみよう。
 ```{r}
 p_x1 <- tibble(x = x_1) |> 
-  ggplot(aes(x = x, y = after_stat(count) / 1000)) +
+  ggplot(aes(x = x, y = after_stat(prop), group = 1)) +
   geom_bar(color = "black",
            width = 0.5) +
   labs(y = "確率") +
   scale_x_continuous(breaks = 0 : 1,
-                     minor_break = NULL) +
-  ylim(0, 1)
+                     minor_break = NULL) + 
+  scale_y_continuous(breaks = seq(from = 0, to = 1, by = 0.1)) 
 plot(p_x1)
 ```
 
@@ -100,7 +100,7 @@ x_2 <- rbinom(1000, size = 5, prob = 0.7)
 得られた値の分布を棒グラフにして確認してみよう。
 ```{r}
 p_x2 <- tibble(x = x_2) |> 
-  ggplot(aes(x = x, y = after_stat(count) / 1000)) +
+  ggplot(aes(x = x, y = after_stat(prop), group = 1)) +
   geom_bar(color = "black",
            width = 0.5) +
   labs(y = "確率") +
@@ -226,7 +226,7 @@ plot(p_x4)
 p_x4_b <- p_x4 +
   stat_function(fun = dnorm,
                 geom = "line",
-                color = "#FF2400",
+                color = "red3",
                 args = list(mean = 0, sd = 1),
                 inherit.aes = FALSE)
 plot(p_x4_b)

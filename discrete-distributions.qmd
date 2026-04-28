@@ -4,11 +4,17 @@
 
 - 分布（特に離散分布）の確認方法（表と図）を覚えよう。   
 
+今回新たに必要になるパッケージをインストールする（Consoleに直接入力するように）。
+```{r}
+#| eval: false
+install.packages("scales")
+```
 
-まず、**tidyverse**パッケージを忘れずに読み込もう。
+利用するパッケージを読み込む。特に、**tidyverse**パッケージを忘れずに読み込もう。
 ```{r}
 #| message: false
 library(tidyverse)
+library(scales)
 ```
 
 Windows ユーザは、
@@ -107,6 +113,11 @@ coin10 <- sample(coin, size = 10, replace = TRUE) |>
   print()
 ```
 
+::: callout-tip
+`|>` はパイプ演算子 (pipe operator)と呼ばれるもので、cmd + shift + m (macOS) または ctrl + shift + m で入力する。 
+:::
+
+
 10回のうち、表は何回出ただろうか？Rを使って数えてみよう。数えるために、以下の方法をとる。
 
 1.  特定のコイン投げ（1回目, 2回目, $\dots$, 10回目）が表だったかどうか調べる
@@ -202,43 +213,26 @@ plot(bar_coin)
 ```
 
 
-次に、分布をヒストグラムで表したい。ヒストグラムを作るためには、横軸の値を数値にする必要がある。
-そこで、表を1、裏を0に置き換える。たとえば、以下のコードを使う。
-```{r}
-D <- D |> 
-  mutate(res2 = ifelse(res == "表", 1, 0))
-```
-これで、表を1、裏を0とする`res2`という名前の変数が`D`の中にできた。元々あった`res`との対応を確認してみよう。
-```{r}
-with(D, table(res, res2))
-```
-`res`の表が`res2`の1，`res`の裏が`res2`の0に対応することがわかる。
-
-この新しい変数を使って、もう1度度数分布を図にしてみよう。今度は、`geom_bar()` の代わりに`geom_histogram()` を使う。
+上で作った棒グラフの縦軸は回数である。これを分布として表現するために縦軸を割合 (proportion) に変更したい。そのために、`after_stat(prop)`をy軸の変数として指定して、以下のようにする。`group = 1` も必要なので注意されたい。
 
 ```{r}
-hist_coin1 <- ggplot(D, aes(x = res2)) +
-  geom_histogram(color = "black", bins = 2) +
-  labs(x = "結果", y = "回数") +
-  scale_x_continuous(breaks = 0 : 1,
-                     minor_breaks = NULL)
-plot(hist_coin1)
+bar_coin_dist <- ggplot(D, aes(x = res, y = after_stat(prop), group = 1)) +
+  geom_bar(color = "black", width = 0.3) +
+  labs(x = "結果", y = "割合")
+plot(bar_coin_dist)
 ```
 
-取りうる値が0と1の2つしかないので、`bins = 2` でビン（ヒストグラムの棒）の数を2に制限している。
+`group = 1` も必要なので注意されたい。これを忘れると、各カテゴリ内での割合が計算され、すべての棒の高さが1になってしまう。
 
-縦軸を確率密度に変えたいときは次のようにする。
-
+縦軸をパーセント表記に変えたいときは**scales**パッケージの`scales::label_percent`が使える。
+次のようにする。
 ```{r}
-hist_coin2 <- ggplot(D, aes(x = res2, y = after_stat(density))) +
-  geom_histogram(color = "black", bins = 2) +
-  labs(x = "結果", y = "割合") +
-  scale_x_continuous(breaks = 0 : 1,
-                     minor_breaks = NULL)
-plot(hist_coin2)
+bar_coin_pct <- ggplot(D, aes(x = res, y = after_stat(prop), group = 1)) +
+  geom_bar(color = "black", width = 0.3) +
+  labs(x = "結果", y = "%") +
+  scale_y_continuous(labels = label_percent())
+plot(bar_coin_pct)
 ```
-
-
 
 
 ### サイコロ投げ {#sec-rolladie}
@@ -288,15 +282,13 @@ die100 |>
 この分布を図にしよう。
 ```{r}
 D2 <- tibble(res = die100)
-hist_die <- ggplot(D2, aes(x = res, y = after_stat(density))) +
-  geom_histogram(color = "black", bins = 6) +
+hist_die <- ggplot(D2, aes(x = res, y = after_stat(prop), group = 1)) +
+  geom_bar(color = "black", width = 0.5) +
   labs(x = "出た目", y = "割合") +
   scale_x_continuous(breaks = 1 : 6,
                      minor_breaks = NULL)
 plot(hist_die)
 ```
-
-
 
 
 ここまでは、「正しいコイン (a fair coin)」や「正しいサイコロ (a fair die)」を想定してきたが、特定の目が出やすいサイコロ（やコイン）を使うこともできる。「1が出る確率だけ他の目の4倍」というサイコロを1,000回投げてみよう。そのために、`prob` で各目が出る比率を指定する（確率を指定してもよい）。
@@ -326,8 +318,8 @@ unfair1000 |>
 この分布を図にしよう。
 ```{r}
 D3 <- tibble(res = unfair1000)
-hist_die_unfair <- ggplot(D3, aes(x = res, after_stat(density))) +
-  geom_histogram(color = "black", bins = 6) +
+hist_die_unfair <- ggplot(D3, aes(x = res, y = after_stat(prop), group = 1)) +
+  geom_bar(color = "black", width = 0.5) +
   labs(x = "出た目", y = "割合") +
   scale_x_continuous(breaks = 1 : 6,
                      minor_breaks = NULL)
