@@ -313,12 +313,17 @@ plot(h_binom_b)
 ```
 
 $X$がある実数$x$以下の値をとる確率は、分布関数$F_X(x)$で求めることができるが、Rでは次のようにする。
-3以下の確率：
+$Pr(X \leq 3)$（3以下の確率）：
 ```{r}
 pbinom(3, size = 10, prob = 0.3)
 ```
 
-4以上、6以下の確率
+$Pr(4 \leq X \leq 6)$（4以上、6以下の確率）
+```{r}
+pbinom(6, size = 10, prob = 0.3) - pbinom(3, size = 10, prob = 0.3) 
+```
+
+$Pr(4 < X \leq 6)$（4より大きく、6以下の確率）
 ```{r}
 pbinom(6, size = 10, prob = 0.3) - pbinom(4, size = 10, prob = 0.3) 
 ```
