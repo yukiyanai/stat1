@@ -500,7 +500,7 @@ X \sim \mbox{Binomial}(N, \theta)
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3 2 4 5 5 3 5 5</code></pre>
+<pre><code>[1] 6 5 4 2 5 4 3 4</code></pre>
 </div>
 </div>
 <p>結果として、8つの数字が表示されるが、それぞれの数字が、1回ごとの実験（コインを10回投げる）で表が何回出たかを表している。</p>
@@ -521,7 +521,7 @@ Warning
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 3 4 3 3 2 2 5</code></pre>
+<pre><code>[1] 5 2 4 1 0 2 4 4</code></pre>
 </div>
 </div>
 <p>表が出る確率が0.5のコインを使って、1回のコイン投げ実験を1回だけ実行するには、</p>
@@ -541,19 +541,19 @@ Warning
 <div class="cell">
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+<pre><code>[1] 1</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] 0</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] 0</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -566,7 +566,7 @@ Warning
 <div class="cell">
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 1 0 0 1 0 0 1 1 1</code></pre>
+<pre><code> [1] 0 1 1 1 1 0 0 0 1 1</code></pre>
 </div>
 </div>
 <p>確率変数 <span class="math inline">\(X\)</span> が、<span class="math inline">\(X \sim \mbox{Binomial}(10, 0.3)\)</span> のとき、確率変数<span class="math inline">\(X\)</span>をランダムに1,000個生成してみよう。</p>
@@ -629,21 +629,21 @@ Note
 </div>
 </div>
 </div>
-<p><span class="math inline">\(X\)</span>がある実数<span class="math inline">\(x\)</span>以下の値をとる確率は、分布関数<span class="math inline">\(F_X(x)\)</span>で求めることができるが、Rでは次のようにする。 <span class="math inline">\(Pr(X \leq 3)\)</span>（3以下の確率）：</p>
+<p><span class="math inline">\(X\)</span>がある実数<span class="math inline">\(x\)</span>以下の値をとる確率は、分布関数<span class="math inline">\(F_X(x)\)</span>で求めることができるが、Rでは次のようにする。 <span class="math inline">\(\Pr(X \leq 3)\)</span>（3以下の確率）：</p>
 <div class="cell">
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">3</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6496107</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(Pr(4 \leq X \leq 6)\)</span>（4以上、6以下の確率）</p>
+<p><span class="math inline">\(\Pr(4 \leq X \leq 6)\)</span>（4以上、6以下の確率）</p>
 <div class="cell">
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">6</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">3</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> </span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3397972</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(Pr(4 &lt; X \leq 6)\)</span>（4より大きく、6以下の確率）</p>
+<p><span class="math inline">\(\Pr(4 &lt; X \leq 6)\)</span>（4より大きく、6以下の確率）</p>
 <div class="cell">
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">6</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">4</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> </span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -702,11 +702,11 @@ X \sim \mbox{Normal}(\mu, \sigma)
 <div class="cell">
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">b1</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.02897176</code></pre>
+<pre><code>[1] -0.09187024</code></pre>
 </div>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">b1</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9705065</code></pre>
+<pre><code>[1] 0.8674168</code></pre>
 </div>
 </div>
 <p>乱数の元となった確率分布の平均値、標準偏差と比べると、どんなことが言えるだろうか？</p>
@@ -730,11 +730,11 @@ X \sim \mbox{Normal}(\mu, \sigma)
 <div class="cell">
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">b2</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01434414</code></pre>
+<pre><code>[1] 0.006740501</code></pre>
 </div>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">b2</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.009669</code></pre>
+<pre><code>[1] 1.013106</code></pre>
 </div>
 </div>
 <p>乱数の元となった確率分布の平均値、標準偏差と比べると、どんなことが言えるだろうか？</p>
@@ -774,11 +774,11 @@ X \sim \mbox{Normal}(\mu, \sigma)
 <div class="cell">
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">b3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.01234</code></pre>
+<pre><code>[1] 9.980957</code></pre>
 </div>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">b3</span><span class="op">)</span></span></code><button title="コピーする" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.008872</code></pre>
+<pre><code>[1] 2.022098</code></pre>
 </div>
 </div>
 <p>乱数の元となった確率分布の平均値、標準偏差と比べると、どんなことが言えるだろうか？</p>
